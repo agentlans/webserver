@@ -20,7 +20,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "redirparam")
-        self.WriteFile (www, "redirparam/file.php", 0444,
+        self.WriteFile (www, "redirparam/file.php", 0o444,
                         '<?php echo "one=".$_GET["arg1"]." two=".$_GET["arg2"]?>')
 
     def Precondition (self):

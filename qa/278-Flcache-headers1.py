@@ -43,7 +43,7 @@ class Test (TestCollection):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, FILE, 0755, CGI_CODE)
+        self.WriteFile (d, FILE, 0o755, CGI_CODE)
 
         # First request
         obj = self.Add (TestEntry())

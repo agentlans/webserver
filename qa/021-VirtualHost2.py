@@ -25,7 +25,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "vhost2")
-        self.WriteFile (d, "file", 0444, MAGIC)
+        self.WriteFile (d, "file", 0o444, MAGIC)
 
         self.conf = CONF % (d)
 

@@ -22,10 +22,10 @@
 
 from cgi import escape
 
-from Widget import Widget
-from Server import cfg
-from util import props_to_str
-from util import to_utf8
+from .Widget import Widget
+from .Server import cfg
+from .util import props_to_str
+from .util import to_utf8
 
 HEADER = [
     '<script type="text/javascript" src="/CTK/js/jquery.form-defaults.js"></script>'

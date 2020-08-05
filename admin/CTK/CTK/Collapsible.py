@@ -22,9 +22,9 @@
 # 02110-1301, USA.
 #
 
-from Box import Box
-from Widget import Widget
-from RawHTML import RawHTML
+from .Box import Box
+from .Widget import Widget
+from .RawHTML import RawHTML
 
 class Collapsible (Box):
     """
@@ -43,7 +43,8 @@ class Collapsible (Box):
           container  = CTK.Collapsible (('Show', 'Hide'))
           container += CTK.RawHTML ('<p>This text can be hidden, or not.</p>')
     """
-    def __init__ (self, (titles), collapsed=True):
+    def __init__ (self, xxx_todo_changeme, collapsed=True):
+        (titles) = xxx_todo_changeme
         Box.__init__ (self, {'class': 'collapsible'})
 
         self.collapsed = collapsed
@@ -102,7 +103,8 @@ class CollapsibleEasy (Collapsible):
           container  = CTK.CollapsibleEasy (('Show', 'Hide'))
           container += CTK.RawHTML ('<p>This text can be hidden, or not.</p>')
     """
-    def __init__ (self, (titles), collapsed=True):
+    def __init__ (self, xxx_todo_changeme1, collapsed=True):
+        (titles) = xxx_todo_changeme1
         assert len(titles) == 2
         assert type(titles[0]) == str
         assert type(titles[1]) == str

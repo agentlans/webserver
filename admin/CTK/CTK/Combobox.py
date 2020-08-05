@@ -20,9 +20,9 @@
 # 02110-1301, USA.
 #
 
-from Widget import Widget
-from Server import cfg
-from util import props_to_str
+from .Widget import Widget
+from .Server import cfg
+from .util import props_to_str
 
 class Combobox (Widget):
     """
@@ -91,7 +91,7 @@ class Combobox (Widget):
 
         # Render the container
         header = ''
-        for p in filter(lambda x: x!='selected', self.props):
+        for p in [x for x in self.props if x!='selected']:
             if self.props[p]:
                 header += ' %s="%s"' %(p, self.props[p])
             else:

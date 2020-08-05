@@ -19,7 +19,7 @@ class Test (TestBase):
         self.post             = "var="+random
         self.expected_content = "file:%s" % (tmpfile)
 
-        self.WriteFile (www, "Post1Mb.php", 0444, "<?php echo $_POST['var']; ?>")
+        self.WriteFile (www, "Post1Mb.php", 0o444, "<?php echo $_POST['var']; ?>")
 
     def Precondition (self):
         return os.path.exists (look_for_php())

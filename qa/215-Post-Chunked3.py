@@ -32,7 +32,7 @@ class Test (TestBase):
         self.post              = "0\r\n"
 
     def Prepare (self, www):
-        self.WriteFile (www, FILE, 0444, SCRIPT)
+        self.WriteFile (www, FILE, 0o444, SCRIPT)
 
     def Precondition (self):
         return os.path.exists (look_for_php())

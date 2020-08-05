@@ -25,9 +25,10 @@
 import re
 import string
 
-from consts import *
-from util import json_dump
-from PageCleaner import Postprocess
+from .consts import *
+from .util import json_dump
+from .PageCleaner import Postprocess
+from functools import reduce
 
 SYNC_JS_LOAD_JS = """
 if (typeof (__loaded_%(name)s) == 'undefined') {
@@ -72,9 +73,9 @@ class RenderResponse:
         # Jquery MUST be loaded for this code to work
         sync_js_load = ""
 
-        for js_header in filter(lambda x: x.startswith('<script'), self.headers):
+        for js_header in [x for x in self.headers if x.startswith('<script')]:
             url_js  = re.findall (r'src="(.+)"', js_header)[0]
-            name_js = ''.join (map (lambda x: ('_',x)[x in alpha], re.findall (r'src=".+/(.+)\.js"', js_header)[0]))
+            name_js = ''.join ([('_',x)[x in alpha] for x in re.findall (r'src=".+/(.+)\.js"', js_header)[0]])
             sync_js_load += SYNC_JS_LOAD_JS %({'name':name_js, 'url':url_js})
 
         # Render the Javascript block
@@ -84,7 +85,7 @@ class RenderResponse:
         return Postprocess(txt)
 
     def toJSON (self):
-        tmp = filter (lambda x: x, [x.toJSON() for x in self.helps])
+        tmp = [x for x in [x.toJSON() for x in self.helps] if x]
         if tmp:
             help = []
             for e in reduce(lambda x,y: x+y, tmp):

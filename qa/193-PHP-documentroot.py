@@ -30,8 +30,8 @@ class Test (TestBase):
     def Prepare (self, www):
         # Temp dir outside of the path document root
         d = tempfile.mkdtemp ("che193")
-        os.chmod(d, 0755)
-        self.WriteFile (d, "index.php", 0444, PHP_SCRIPT)
+        os.chmod(d, 0o755)
+        self.WriteFile (d, "index.php", 0o444, PHP_SCRIPT)
         self.conf = CONF % (DIR, d)
 
     def Precondition (self):

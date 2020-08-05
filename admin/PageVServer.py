@@ -378,11 +378,11 @@ class BehaviorWidget (CTK.Container):
 
         tmp = CTK.cfg.get_val ('vserver!%s!rule!%s!handler'%(vsrv_num, r), '')
         if tmp:
-            handler = CTK.RawHTML (_(filter (lambda x: x[0] == tmp, HANDLERS)[0][1]))
+            handler = CTK.RawHTML (_([x for x in HANDLERS if x[0] == tmp][0][1]))
 
         tmp = CTK.cfg.get_val ('vserver!%s!rule!%s!auth'%(vsrv_num, r), '')
         if tmp:
-            auth = CTK.RawHTML (_(filter (lambda x: x[0] == tmp, VALIDATORS)[0][1]))
+            auth = CTK.RawHTML (_([x for x in VALIDATORS if x[0] == tmp][0][1]))
 
         tmp = (CTK.cfg.get_val ('vserver!%s!rule!%s!document_root'%(vsrv_num, r)))
         if tmp:

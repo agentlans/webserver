@@ -24,11 +24,11 @@
 
 from cgi import escape
 
-from RawHTML import RawHTML
-from Widget import Widget
-from Server import cfg
-from util import to_utf8
-from Server import get_server
+from .RawHTML import RawHTML
+from .Widget import Widget
+from .Server import cfg
+from .util import to_utf8
+from .Server import get_server
 
 HEADER = [
     '<script type="text/javascript" src="/CTK/js/jquery.form-defaults.js"></script>'

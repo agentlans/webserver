@@ -1,7 +1,7 @@
 from base import *
 from util import *
 
-from cStringIO import StringIO
+from io import StringIO
 from gzip import GzipFile
 
 
@@ -36,5 +36,5 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "gzip1")
-        self.WriteFile (www, "gzip1/file.txt", 0444, MAGIC)
+        self.WriteFile (www, "gzip1/file.txt", 0o444, MAGIC)
 

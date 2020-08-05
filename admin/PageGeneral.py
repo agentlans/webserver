@@ -97,7 +97,7 @@ def is_new_bind (port, ip=None):
              for x in CTK.cfg.keys ('server!bind')]
 
     if (port, ip) in binds:
-        raise ValueError, _("Port/Interface combination already in use.")
+        raise ValueError(_("Port/Interface combination already in use."))
 
 
 def commit():
@@ -108,7 +108,7 @@ def commit():
     if port:
         try:
             is_new_bind (port, interface)
-        except ValueError, e:
+        except ValueError as e:
             return { "ret": "error", "errors": { 'new_port': str(e),
                                                  'new_if':   str(e) }}
 
@@ -161,7 +161,7 @@ def _rules_per_bind (bind):
     bind_usage = _all_bindings_per_rule ()
 
     for rule_dict in bind_usage:
-        rule_pre, bindings = rule_dict.items()[0]
+        rule_pre, bindings = list(rule_dict.items())[0]
         if bind in bindings:
             pre = '%s!match!bind'%(rule_pre)
             balanced = CTK.cfg.keys (pre)
@@ -178,7 +178,7 @@ def _protected_bindings ():
     protect = []
     rules   = _all_bindings_per_rule()
     for rule in rules:
-        bindings = rule.values()[0]
+        bindings = list(rule.values())[0]
         if len(bindings) == 1:
             protect.append(bindings[0])
     return protect

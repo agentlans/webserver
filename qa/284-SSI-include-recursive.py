@@ -43,7 +43,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, FILE, 0444, FILE1_CONTENT)
-        self.WriteFile (d, INC1, 0444, FILE2_CONTENT)
-        self.WriteFile (d, INC2, 0444, MAGIC)
+        self.WriteFile (d, FILE, 0o444, FILE1_CONTENT)
+        self.WriteFile (d, INC1, 0o444, FILE2_CONTENT)
+        self.WriteFile (d, INC2, 0o444, MAGIC)
 

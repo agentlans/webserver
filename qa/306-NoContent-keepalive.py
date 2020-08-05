@@ -30,7 +30,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "cgi_error_204_1")
-        f = self.WriteFile (d, "exec.cgi", 0555, CGI_BASE )
+        f = self.WriteFile (d, "exec.cgi", 0o555, CGI_BASE )
 
     def CustomTest (self):
 

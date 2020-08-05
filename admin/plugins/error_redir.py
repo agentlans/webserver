@@ -97,7 +97,7 @@ class Content (CTK.Container):
 
         # Add new
         redir_codes  = [('default', _('Default Error'))]
-        redir_codes += filter (lambda x: not x[0] in entries, ERROR_CODES)
+        redir_codes += [x for x in ERROR_CODES if not x[0] in entries]
 
         table = CTK.PropsTable()
         table.Add (_('Error'),       CTK.ComboCfg('new_error', redir_codes, {'class':'noauto'}), _(NOTE_ERROR))

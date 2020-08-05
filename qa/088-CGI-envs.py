@@ -34,5 +34,5 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "cgienvs")
-        self.WriteFile (www, "cgienvs/cgi.cgi", 0555,
+        self.WriteFile (www, "cgienvs/cgi.cgi", 0o555,
                         CGI_BASE % (ENV1_NAME, ENV1_NAME, ENV2_NAME, ENV2_NAME))

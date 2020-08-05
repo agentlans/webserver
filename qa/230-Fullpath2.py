@@ -36,5 +36,5 @@ class Test (TestBase):
                 d = self.Mkdir (www, pd)
             else:
                 d = www
-            self.WriteFile (d, pf, 0755, CGI_BASE)
+            self.WriteFile (d, pf, 0o755, CGI_BASE)
 

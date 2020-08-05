@@ -46,11 +46,11 @@ class Test (TestCollection):
         self.delay          = 1
 
     def JustBefore (self, www):
-        test_num = Test.counter.next()
+        test_num = next(Test.counter)
         self.filename = "test277-id%s-test%s" %(id(self), test_num)
 
         # Write the new file
-        self.WriteFile (self.local_dir, self.filename, 0755, CGI_CODE)
+        self.WriteFile (self.local_dir, self.filename, 0o755, CGI_CODE)
 
         # Create sub-request objects
         self.Empty()

@@ -156,7 +156,7 @@ def _rules_per_source (source):
     source_usage = _all_sources_per_rule ()
 
     for rule_dict in source_usage:
-        rule_pre, sources = rule_dict.items()[0]
+        rule_pre, sources = list(rule_dict.items())[0]
         if source in sources:
             pre = '%s!handler!balancer!source'%(rule_pre)
             balanced = CTK.cfg.keys (pre)
@@ -173,7 +173,7 @@ def _protected_sources ():
     protect = []
     rules   = _all_sources_per_rule()
     for rule in rules:
-        sources = rule.values()[0]
+        sources = list(rule.values())[0]
         if len(sources) == 1:
             protect.append(sources[0])
     return protect
@@ -304,7 +304,7 @@ class Render_Source:
             workarea += EnvironmentWidget (num)
 
         sources = _all_sources_per_rule ()
-        rules   = [dic.keys()[0] for dic in sources if str(num) in dic.values()[0]]
+        rules   = [list(dic.keys())[0] for dic in sources if str(num) in list(dic.values())[0]]
 
         if rules:
             workarea += self.Source_Usage (rules)

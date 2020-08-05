@@ -21,12 +21,12 @@
 # 02110-1301, USA.
 #
 
-from Widget import Widget
-from Box import Box
-from RawHTML import RawHTML
-from Container import Container
-from Server import cfg
-from util import *
+from .Widget import Widget
+from .Box import Box
+from .RawHTML import RawHTML
+from .Container import Container
+from .Server import cfg
+from .util import *
 
 
 HTML = """
@@ -45,10 +45,10 @@ class Radio (Widget):
         # Deal with a couple of exceptions
         new_props = self._props.copy()
 
-        if new_props.has_key('checked') and int(new_props.pop('checked')):
+        if 'checked' in new_props and int(new_props.pop('checked')):
             new_props['checked'] = "checked"
 
-        if new_props.has_key('disabled') and int(new_props.pop('disabled')):
+        if 'disabled' in new_props and int(new_props.pop('disabled')):
             new_props['disabled'] = "disabled"
 
         # Render the widget

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 # Cherokee POTFILES.in generator
 #
@@ -48,7 +48,7 @@ def main():
 
     # Print result
     pot_files.sort()
-    print ('\n'.join (pot_files)),
+    print(('\n'.join (pot_files)), end=' ')
 
 if __name__ == "__main__":
     main()

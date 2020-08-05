@@ -33,6 +33,6 @@ class Test (TestBase):
         d  = self.Mkdir (www, "%s_dir" % (SERVER))
 
         d2 = self.Mkdir (d, "~%s" % (USERNAME))
-        self.WriteFile (d2, FILENAME, 0444, MAGIC);
+        self.WriteFile (d2, FILENAME, 0o444, MAGIC);
 
         self.conf = CONF % (SERVER, d)

@@ -50,5 +50,5 @@ class Test (TestBase):
         self.conf = CONF % (HOST, d, DIR)
 
         e = self.Mkdir (d, DIR)
-        self.WriteFile (e, FILE, 0555, CGI_BASE%(FORBIDDEN, MAGIC))
+        self.WriteFile (e, FILE, 0o555, CGI_BASE%(FORBIDDEN, MAGIC))
 

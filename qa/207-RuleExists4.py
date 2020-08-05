@@ -40,7 +40,7 @@ class Test (TestBase):
         droot = self.Mkdir (www, '207')
         e     = self.Mkdir (droot, DIR)
 
-        self.WriteFile (e, FILE, 0555, CGI_BASE % (MAGIC))
+        self.WriteFile (e, FILE, 0o555, CGI_BASE % (MAGIC))
 
         vars = globals()
         vars['droot'] = droot

@@ -21,7 +21,7 @@
 #
 
 import string
-from Widget import Widget
+from .Widget import Widget
 
 # WARNING
 # -------

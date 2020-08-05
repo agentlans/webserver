@@ -20,10 +20,10 @@
 # 02110-1301, USA.
 #
 
-from consts import *
-from Widget import Widget
-from Server import publish
-from util import props_to_str
+from .consts import *
+from .Widget import Widget
+from .Server import publish
+from .util import props_to_str
 
 HTML = """
 <div id="%(id)s" %(props)s>

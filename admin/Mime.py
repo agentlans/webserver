@@ -68,7 +68,7 @@ def commit():
                 val = validations.is_safe_mime_exts (new, CTK.cfg.get_val(k))
                 if util.lists_differ (val, new):
                     updates[k] = val
-            except ValueError, e:
+            except ValueError as e:
                 return { "ret": "error", "errors": { k: str(e) }}
         elif k.endswith('!max-age'):
             new = CTK.post[k]
@@ -77,7 +77,7 @@ def commit():
                     val = validations.is_positive_int (new)
                     if val != new:
                         updates[k] = val
-                except ValueError, e:
+                except ValueError as e:
                     return { "ret": "error", "errors": { k: str(e) }}
         CTK.cfg[k] = CTK.post[k]
 

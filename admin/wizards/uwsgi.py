@@ -38,7 +38,7 @@ import CTK
 import Wizard
 import validations
 from xml.dom import minidom
-import ConfigParser
+import configparser
 
 try:
     import yaml
@@ -372,7 +372,7 @@ def uwsgi_get_socket(filename):
 
     elif filename.endswith('.ini'):
         try:
-            c = ConfigParser.ConfigParser()
+            c = configparser.ConfigParser()
             c.read(filename)
             s = c.get('uwsgi', 'socket')
         except:

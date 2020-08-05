@@ -29,6 +29,6 @@ class Test (TestBase):
 
     def Prepare (self, www):
         test_dir = self.Mkdir (www, DIR)
-        self.WriteFile (test_dir, "Range100b", 0444, MAGIC)
+        self.WriteFile (test_dir, "Range100b", 0o444, MAGIC)
 
         self.conf = CONF.replace('<dir>', test_dir)

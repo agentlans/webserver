@@ -138,7 +138,7 @@ def wizard_php_add (key):
                 ret = __source_add_std (php_path)
             else:
                 ret = __source_add_fpm (php_path)
-        except Exception, e:
+        except Exception as e:
             return str(e)
 
         source = __find_source()
@@ -179,7 +179,7 @@ def wizard_php_add (key):
         CTK.cfg['%s!encoder!gzip' %(next)]              = 'allow'
 
     # Index files
-    indexes = filter (None, CTK.cfg.get_val ('%s!directory_index' %(key), '').split(','))
+    indexes = [_f for _f in CTK.cfg.get_val ('%s!directory_index' %(key), '').split(',') if _f]
     if not 'index.php' in indexes:
         indexes.append ('index.php')
         CTK.cfg['%s!directory_index' %(key)] = ','.join(indexes)
@@ -565,7 +565,7 @@ def __source_add_std (php_path):
     if not std_info:
         raise Exception (_('Could not determine PHP-CGI settings.'))
 
-    if not std_info.has_key('conf_file'):
+    if 'conf_file' not in std_info:
         raise Exception (_('Could not determine PHP-CGI configuration file.'))
 
     # IANA: TCP ports 47809-47999 are unassigned
@@ -601,7 +601,7 @@ def get_installation_GID():
         groups = os.getgroups()
         groups.sort()
         first_group = str(groups[0])
-    except OSError,e:
+    except OSError as e:
         # os.getgroups can fail when run as root (MacOS X 10.6)
         if os.getuid() != 0:
             raise e

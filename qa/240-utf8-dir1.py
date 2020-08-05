@@ -17,4 +17,4 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        f = self.WriteFile (d, FILENAME, 0644, MAGIC)
+        f = self.WriteFile (d, FILENAME, 0o644, MAGIC)

@@ -22,11 +22,11 @@
 # 02110-1301, USA.
 #
 
-from Box import Box
-from Button import Button
-from Refreshable import RefreshableURL
-from Server import request
-from RawHTML import RawHTML
+from .Box import Box
+from .Button import Button
+from .Refreshable import RefreshableURL
+from .Server import request
+from .RawHTML import RawHTML
 
 
 # Forces all the submitters inside a Druid. If all the submittion of

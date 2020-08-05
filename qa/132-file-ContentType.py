@@ -10,5 +10,5 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "content_type1")
-        self.WriteFile (d, "file.jpg", 0444, " ")
+        self.WriteFile (d, "file.jpg", 0o444, " ")
 

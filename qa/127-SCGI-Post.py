@@ -47,7 +47,7 @@ class Test (TestBase):
         self.forbidden_content = ["pyscgi", "SCGIServer", "write"]
 
     def Prepare (self, www):
-        scgi_file = self.WriteFile (www, "scgi_test2.scgi", 0444, SCRIPT)
+        scgi_file = self.WriteFile (www, "scgi_test2.scgi", 0o444, SCRIPT)
 
         pyscgi = os.path.join (www, 'pyscgi.py')
         if not os.path.exists (pyscgi):

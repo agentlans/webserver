@@ -10,7 +10,7 @@ TABLE = [
 ]
 
 def table_reordered (post_key):
-    print "New Order", CTK.post[post_key].split(',')
+    print("New Order", CTK.post[post_key].split(','))
     return "{'ret': 'ok'}"
 
 def default():

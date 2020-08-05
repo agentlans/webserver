@@ -137,7 +137,7 @@ def is_valid_webdir (web_dir):
 
     rule = cfg_vsrv_rule_find_regexp (vsrv_pre, '^'+web_dir)
     if rule:
-        raise ValueError, _("Already configured: %s"%(web_dir))
+        raise ValueError(_("Already configured: %s"%(web_dir)))
 
     return web_dir
 

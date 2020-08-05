@@ -38,5 +38,5 @@ class Test (TestBase):
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
         self.WriteFile (d, MAGIC)
-        self.WriteFile (www, FILE, 0555, CGI_BASE % (FORBIDDEN))
+        self.WriteFile (www, FILE, 0o555, CGI_BASE % (FORBIDDEN))
 

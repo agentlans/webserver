@@ -26,7 +26,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, "test", 0755, CGI_BASE)
+        self.WriteFile (d, "test", 0o755, CGI_BASE)
 
         pt = www + PATH_INFO
         self.expected_content = "PATH_TRANSLATED: >%s<" % (pt)

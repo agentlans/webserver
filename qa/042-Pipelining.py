@@ -26,7 +26,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "pipe1")
-        self.WriteFile (www, "pipe1/file1", 0444, MAGIC %("one"))
-        self.WriteFile (www, "pipe1/file2", 0444, MAGIC %("two"))
-        self.WriteFile (www, "pipe1/file3", 0444, MAGIC %("three"))
+        self.WriteFile (www, "pipe1/file1", 0o444, MAGIC %("one"))
+        self.WriteFile (www, "pipe1/file2", 0o444, MAGIC %("two"))
+        self.WriteFile (www, "pipe1/file3", 0o444, MAGIC %("three"))
 

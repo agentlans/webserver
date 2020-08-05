@@ -22,7 +22,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "script_name_1/sub/dir")
-        self.WriteFile (d, "exec.cgi", 0755,
+        self.WriteFile (d, "exec.cgi", 0o755,
                         """#!/bin/sh
 
                         echo "Content-Type: text/plain"

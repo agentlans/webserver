@@ -26,7 +26,7 @@ class Test (TestBase):
                                 POST_EXTRA
 
     def Prepare (self, www):
-        self.WriteFile (www, FILENAME, 0444,
+        self.WriteFile (www, FILENAME, 0o444,
                         "<?php echo $_POST['%s']; ?>" %(POST_VAR))
 
     def Precondition (self):

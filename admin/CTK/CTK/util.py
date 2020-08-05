@@ -29,7 +29,7 @@ import compiler
 try:
     import json
 except ImportError:
-    import json_embedded as json
+    from . import json_embedded as json
 
 #
 # Strings
@@ -77,7 +77,7 @@ def find_copy_name (orig, names):
         orig = orig[:orig.rindex(' Copy')]
 
     # Find higher copy
-    similar = filter (lambda x: x.startswith(orig), names)
+    similar = [x for x in names if x.startswith(orig)]
     if '%s Copy'%(orig) in similar:
         higher = 1
     else:
@@ -113,21 +113,21 @@ def to_utf8 (s, input_encoding='utf-8'):
     supposes default system encoding to be UTF-8, so basically it
     converts Unicode to UTF-8 only"""
 
-    if type(s) == types.StringType:
+    if type(s) == bytes:
         if input_encoding == 'utf-8':
             return s
-        return unicode (s, input_encoding).encode('utf-8')
-    elif type(s) == types.UnicodeType:
+        return str (s, input_encoding).encode('utf-8')
+    elif type(s) == str:
         return s.encode('utf-8')
-    elif type(s) == types.ListType:
+    elif type(s) == list:
         return [to_utf8(x) for x in s]
-    elif type(s) == types.TupleType:
+    elif type(s) == tuple:
         return tuple([to_utf8(x) for x in s])
-    elif type(s) == types.NoneType:
+    elif type(s) == type(None):
         return s
-    elif type(s) == types.DictType:
-        for k in s.keys():
-            if type(k) in (types.StringType, types.UnicodeType):
+    elif type(s) == dict:
+        for k in list(s.keys()):
+            if type(k) in (bytes, str):
                 k = to_utf8(k)
             s[k] = to_utf8(s[k])
         return s
@@ -139,19 +139,19 @@ def to_unicode (s, input_encoding='utf-8'):
     """Converts all the string entries of an structure to Unicode. It
     supposes default system encoding to be UTF-8."""
 
-    if type(s) == types.UnicodeType:
+    if type(s) == str:
         return s
-    elif type(s) == types.StringType:
-        return unicode (s, input_encoding)
-    elif type(s) == types.ListType:
+    elif type(s) == bytes:
+        return str (s, input_encoding)
+    elif type(s) == list:
         return [to_unicode(x) for x in s]
-    elif type(s) == types.TupleType:
+    elif type(s) == tuple:
         return tuple([to_unicode(x) for x in s])
-    elif type(s) == types.NoneType:
+    elif type(s) == type(None):
         return s
-    elif type(s) == types.DictType:
-        for k in s.keys():
-            if type(k) in (types.StringType, types.UnicodeType):
+    elif type(s) == dict:
+        for k in list(s.keys()):
+            if type(k) in (bytes, str):
                 k = to_unicode(k)
             s[k] = to_unicode(s[k])
         return s
@@ -163,7 +163,7 @@ def to_unicode (s, input_encoding='utf-8'):
 # Debug
 #
 def print_exception (output = sys.stderr):
-    print >> output, traceback.format_exc()
+    print(traceback.format_exc(), file=output)
 
 
 
@@ -173,14 +173,14 @@ def print_exception (output = sys.stderr):
 def data_eval (node_or_string):
     _safe_names = {'None': None, 'True': True, 'False': False}
 
-    if isinstance(node_or_string, basestring):
+    if isinstance(node_or_string, str):
         node_or_string = compiler.parse(node_or_string, mode='eval')
 
     if isinstance(node_or_string, compiler.ast.Expression):
         node_or_string = node_or_string.node
 
     def _convert(node):
-        if isinstance(node, compiler.ast.Const) and isinstance(node.value, (basestring, int, float, long, complex)):
+        if isinstance(node, compiler.ast.Const) and isinstance(node.value, (str, int, float, complex)):
             return node.value
         elif isinstance(node, compiler.ast.Tuple):
             return tuple(map(_convert, node.nodes))

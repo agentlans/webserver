@@ -47,4 +47,4 @@ class Test (TestBase):
         cgi  = CGI % (HDR_NAM1, HDR_VAL1, temp, HDR_NAM2, HDR_VAL2, DISCART)
 
         d = self.Mkdir (www, DIR)
-        f = self.WriteFile (d, FILE, 0755, cgi)
+        f = self.WriteFile (d, FILE, 0o755, cgi)

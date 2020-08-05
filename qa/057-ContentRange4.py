@@ -18,7 +18,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         srandom = str_random (LENGTH)
-        self.WriteFile (www, "Range100k2", 0444, srandom)
+        self.WriteFile (www, "Range100k2", 0o444, srandom)
 
         forbidden = self.WriteTemp (srandom[OFFSET:])
 

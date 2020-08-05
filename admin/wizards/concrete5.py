@@ -290,7 +290,7 @@ def is_concrete5_dir (path):
     try:
         validations.is_local_file_exists (module_inc)
     except:
-        raise ValueError, _(ERROR_NO_SRC)
+        raise ValueError(_(ERROR_NO_SRC))
     return path
 
 VALS = [

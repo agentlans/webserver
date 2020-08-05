@@ -28,7 +28,7 @@ class Test (TestBase):
         self.conf = CONF.replace('<dir>', test_dir)
 
         srandom = str_random (LENGTH)
-        self.WriteFile (test_dir, "Range100k2", 0444, srandom)
+        self.WriteFile (test_dir, "Range100k2", 0o444, srandom)
 
         forbidden = self.WriteTemp (srandom[OFFSET:])
 

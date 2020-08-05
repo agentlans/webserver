@@ -149,11 +149,11 @@ class System_stats__Darwin (Thread, System_stats):
         line = self.iostat_fd.stdout.readline().rstrip('\n')
 
         # Skip headers
-        if len(filter (lambda x: x not in " -.0123456789", line)):
+        if len([x for x in line if x not in " -.0123456789"]):
             return
 
         # Parse
-        parts = filter (lambda x: x, line.split(' '))
+        parts = [x for x in line.split(' ') if x]
         assert len(parts) == 6, parts
 
         self.cpu.user  = int(parts[0])
@@ -164,17 +164,17 @@ class System_stats__Darwin (Thread, System_stats):
     def _read_memory (self):
         def to_int (x):
             if x[-1] == 'K':
-                return long(x[:-1]) * 1024
-            return long(x)
+                return int(x[:-1]) * 1024
+            return int(x)
 
         line = self.vm_stat_fd.stdout.readline().rstrip('\n')
 
         # Skip headers
-        if len(filter (lambda x: x not in " -.0123456789K", line)):
+        if len([x for x in line if x not in " -.0123456789K"]):
             return
 
         # Parse
-        tmp = filter (lambda x: x, line.split(' '))
+        tmp = [x for x in line.split(' ') if x]
         values = [(to_int(x) * self._page_size) / 1024 for x in tmp]
 
         if self.vm_stat_type == 22:
@@ -377,14 +377,14 @@ class System_stats__Solaris (Thread, System_stats):
             line = self.vmstat_fd.stdout.readline().rstrip('\n')
 
             # Skip headers
-            if len(filter (lambda x: x not in " -.0123456789", line)):
+            if len([x for x in line if x not in " -.0123456789"]):
                 if tries == 2:
                     return
                 continue
             break
 
         # Parse
-        fields = filter (lambda x: x, line.split(' '))
+        fields = [x for x in line.split(' ') if x]
 
         # CPU
         user = int(fields[-3])
@@ -461,7 +461,7 @@ class System_stats__FreeBSD (Thread, System_stats):
         for key in ("hw.ncpu", "hw.clockrate", "hw.pagesize",
                     "kern.threads.virtual_cpu", "vm.stats.vm.v_page_count"):
             ret = popen.popen_sync ("/sbin/sysctl %s"%(key))
-            lines = filter (lambda x: x, ret['stdout'].split('\n'))
+            lines = [x for x in ret['stdout'].split('\n') if x]
 
             for line in lines:
                 parts = line.split()
@@ -495,11 +495,11 @@ class System_stats__FreeBSD (Thread, System_stats):
         line = self.vmstat_fd.stdout.readline().rstrip('\n')
 
         # Skip headers
-	if len(filter (lambda x: x not in " -.0123456789", line)):
+	if len([x for x in line if x not in " -.0123456789"]):
 	    return
 
         # Parse
-	parts = filter (lambda x: x, line.split(' '))
+	parts = [x for x in line.split(' ') if x]
 
         # Memory
         self.mem.free = int(parts[4])
@@ -553,7 +553,7 @@ class System_stats__OpenBSD (Thread, System_stats):
     def _read_cpu_and_mem_info (self):
         # Execute sysctl
         ret = popen.popen_sync ("/sbin/sysctl hw.ncpufound hw.ncpu hw.cpuspeed hw.physmem")
-        lines = filter (lambda x: x, ret['stdout'].split('\n'))
+        lines = [x for x in ret['stdout'].split('\n') if x]
 
         # Parse output
 
@@ -595,11 +595,11 @@ class System_stats__OpenBSD (Thread, System_stats):
         line = self.vmstat_fd.stdout.readline().rstrip('\n')
 
         # Skip headers
-        if len(filter (lambda x: x not in " -.0123456789", line)):
+        if len([x for x in line if x not in " -.0123456789"]):
             return
 
         # Parse
-        parts = filter (lambda x: x, line.split(' '))
+        parts = [x for x in line.split(' ') if x]
 
         # For OpenBSD there are 19 fields output from vmstat
         if not len(parts) == 19:
@@ -612,11 +612,11 @@ class System_stats__OpenBSD (Thread, System_stats):
         # Read a new line
         line = self.vmstat_fd.stdout.readline().rstrip('\n')
         # Skip headers
-        if len(filter (lambda x: x not in " -.0123456789", line)):
+        if len([x for x in line if x not in " -.0123456789"]):
             return
 
         # Parse
-        values = filter (lambda x: x, line.split(' '))
+        values = [x for x in line.split(' ') if x]
 
         if not len(values) == 19:
                 return
@@ -633,19 +633,19 @@ class System_stats__OpenBSD (Thread, System_stats):
 if __name__ == '__main__':
     sys_stats = get_system_stats()
 
-    print "Hostname:",   sys_stats.hostname
-    print "Speed:",      sys_stats.cpu.speed
-    print "Processors:", sys_stats.cpu.num
-    print "Cores:",      sys_stats.cpu.cores
+    print("Hostname:",   sys_stats.hostname)
+    print("Speed:",      sys_stats.cpu.speed)
+    print("Processors:", sys_stats.cpu.num)
+    print("Cores:",      sys_stats.cpu.cores)
 
     while True:
-        print "CPU:",
-        print 'used', sys_stats.cpu.usage,
-        print 'idle', sys_stats.cpu.idle
+        print("CPU:", end=' ')
+        print('used', sys_stats.cpu.usage, end=' ')
+        print('idle', sys_stats.cpu.idle)
 
-        print "MEMORY:",
-        print 'total', sys_stats.mem.total,
-        print 'used',  sys_stats.mem.used,
-        print 'free',  sys_stats.mem.free
+        print("MEMORY:", end=' ')
+        print('total', sys_stats.mem.total, end=' ')
+        print('used',  sys_stats.mem.used, end=' ')
+        print('free',  sys_stats.mem.free)
 
         time.sleep(1)

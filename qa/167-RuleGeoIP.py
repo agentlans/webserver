@@ -44,4 +44,4 @@ class Test (TestBase):
         self.conf = CONF % (DIR, DIR)
 
         d = self.Mkdir (www, DIR)
-        f = self.WriteFile (d, FILE, 0755, CGI)
+        f = self.WriteFile (d, FILE, 0o755, CGI)

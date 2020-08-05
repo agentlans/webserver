@@ -24,6 +24,6 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "auth2")
-        self.WriteFile (d, "passwd", 0444, '%s:%s\n' %(LOGIN,PASSWD))
+        self.WriteFile (d, "passwd", 0o444, '%s:%s\n' %(LOGIN,PASSWD))
 
         self.conf = CONF % (d+"/passwd")

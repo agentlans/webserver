@@ -22,7 +22,7 @@
 # 02110-1301, USA.
 #
 
-from Widget import Widget
+from .Widget import Widget
 
 class Container (Widget):
     """
@@ -40,7 +40,7 @@ class Container (Widget):
     def __len__ (self):
         return len(self.child)
 
-    def __nonzero__ (self):
+    def __bool__ (self):
         # It's an obj, no matter its child.
         return True
 

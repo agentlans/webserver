@@ -101,7 +101,7 @@ class Test (TestCollection):
         self.name = "Method Request Body Handling"
 
     def Prepare (self, www):
-        fcgi_file = self.WriteFile (www, "fcgi_test_methods.cgi", 0444, SCRIPT)
+        fcgi_file = self.WriteFile (www, "fcgi_test_methods.cgi", 0o444, SCRIPT)
         
         fcgi = os.path.join (www, 'fcgi.py')
         if not os.path.exists (fcgi):

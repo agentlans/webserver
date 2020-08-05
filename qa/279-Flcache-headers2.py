@@ -33,7 +33,7 @@ class Test (TestCollection):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, FILE, 0444, CONTENT)
+        self.WriteFile (d, FILE, 0o444, CONTENT)
 
         def CustomTest (self):
             header = self.reply[:self.reply.find("\r\n\r\n")+2]

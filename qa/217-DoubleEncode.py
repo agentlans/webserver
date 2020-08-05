@@ -1,7 +1,7 @@
 from base import *
 from util import *
 
-from cStringIO import StringIO
+from io import StringIO
 import gzip
 from gzip import GzipFile
 
@@ -47,4 +47,4 @@ class Test (TestBase):
         g.write(MAGIC)
         g.close()
 
-        self.WriteFile (d, "file", 0755, CGI_BASE%("%s/temp.gz"%(d)))
+        self.WriteFile (d, "file", 0o755, CGI_BASE%("%s/temp.gz"%(d)))

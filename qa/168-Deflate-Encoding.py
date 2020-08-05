@@ -1,7 +1,7 @@
 from base import *
 from util import *
 
-from cStringIO import StringIO
+from io import StringIO
 import zlib
 
 PRE    = "Random text follows"
@@ -39,5 +39,5 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "deflate1")
-        self.WriteFile (www, "deflate1/file.txt", 0444, MAGIC)
+        self.WriteFile (www, "deflate1/file.txt", 0o444, MAGIC)
 

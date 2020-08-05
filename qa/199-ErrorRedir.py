@@ -45,6 +45,6 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DOMAIN)
-        self.WriteFile (d, CGI_FILE, 0755, CGI_BASE)
+        self.WriteFile (d, CGI_FILE, 0o755, CGI_BASE)
 
         self.conf = CONF % (DOMAIN, d, CGI_FILE)

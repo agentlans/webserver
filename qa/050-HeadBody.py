@@ -20,5 +20,5 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "head-body")
-        self.WriteFile (www, "head-body/test", 0444, MAGIC)
+        self.WriteFile (www, "head-body/test", 0o444, MAGIC)
 

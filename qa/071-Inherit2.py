@@ -26,6 +26,6 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "inherit2/dir1/dir2/dir3")
-        fn = self.WriteFile (www, "inherit2/dir1/test", 0555, MAGIC)
+        fn = self.WriteFile (www, "inherit2/dir1/test", 0o555, MAGIC)
 
         self.conf = CONF % (fn)

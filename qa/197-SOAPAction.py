@@ -32,7 +32,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, "file.php", 0444,
+        self.WriteFile (d, "file.php", 0o444,
                         '<?php /* %s */ echo "%s: ".$_SERVER["HTTP_SOAPACTION"]; ?>' %
                         (FORBIDDEN, HEADER))
 

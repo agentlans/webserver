@@ -25,7 +25,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, "deeper.php", 0444,
+        self.WriteFile (d, "deeper.php", 0o444,
                         '<?php /* %s */ echo "%s"; ?>'%(COMMENT,MAGIC))
 
     def Precondition (self):

@@ -46,7 +46,7 @@ class Test (TestBase):
     def Prepare (self, www):
         d = self.Mkdir (www, HOST)
         c = self.Mkdir (d, "cgi-bin_root")
-        self.WriteFile (c, "program.cgi", 0555, CGI_BASE)
+        self.WriteFile (c, "program.cgi", 0o555, CGI_BASE)
 
 	self.conf = CONF % (HOST, d, DIR, c)
 

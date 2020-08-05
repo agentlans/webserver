@@ -26,6 +26,6 @@ class Test (TestBase):
 
     def Prepare (self, www):
         droot = self.Mkdir (www, DIR_REAL)
-        self.WriteFile (droot, FILE, 0444, MAGIC)
+        self.WriteFile (droot, FILE, 0o444, MAGIC)
 
         self.conf = CONF % (DIR, SECRET, TIMEOUT, droot)

@@ -12,7 +12,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, "simple.php", 0444,
+        self.WriteFile (d, "simple.php", 0o444,
                         "<?php echo 'This'.' is '.'PHP' ?>")
 
     def Precondition (self):

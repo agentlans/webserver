@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 # -*- coding: utf-8 -*-
 #
@@ -35,7 +35,8 @@ import sys
 import stat
 import socket
 import signal
-import thread
+import _thread
+from functools import reduce
 
 # Import CTK
 sys.path.append (os.path.abspath (os.path.realpath(__file__) + '/../CTK'))
@@ -49,7 +50,7 @@ import PageError
 
 def init (scgi_port, cfg_file):
     # Translation support
-    CTK.i18n.install ('cherokee', LOCALEDIR, unicode=True)
+    CTK.i18n.install ('cherokee', LOCALEDIR, str=True)
 
     # Ensure SIGCHLD is set. It needs to receive the signal in order
     # to detect when its child processes finish.
@@ -65,9 +66,9 @@ def init (scgi_port, cfg_file):
     pid     = os.getpid()
 
     if scgi_port.isdigit():
-        print _("Server %(version)s running.. PID=%(pid)d Port=%(scgi_port)s") % (locals())
+        print(_("Server %(version)s running.. PID=%(pid)d Port=%(scgi_port)s") % (locals()))
     else:
-        print _("Server %(version)s running.. PID=%(pid)d Socket=%(scgi_port)s") % (locals())
+        print(_("Server %(version)s running.. PID=%(pid)d Socket=%(scgi_port)s") % (locals()))
 
     # Read configuration file
     CTK.cfg.file = cfg_file
@@ -82,7 +83,7 @@ def init (scgi_port, cfg_file):
         try:
             socket.getaddrinfo ("localhost", int(scgi_port))
         except socket.gaierror:
-            print >> sys.stderr, "[FATAL ERROR]: The 'localhost' host name cannot be resolved.\n"
+            print("[FATAL ERROR]: The 'localhost' host name cannot be resolved.\n", file=sys.stderr)
             sys.exit(1)
 
         CTK.init (host="localhost", port=int(scgi_port), sec_cookie=True, sec_submit=True)
@@ -92,7 +93,7 @@ def init (scgi_port, cfg_file):
         try:
             mode = os.stat (scgi_port)[stat.ST_MODE]
             if stat.S_ISSOCK(mode):
-                print "Removing an old '%s' unix socket.." %(scgi_port)
+                print("Removing an old '%s' unix socket.." %(scgi_port))
                 os.unlink (scgi_port)
         except OSError:
             pass
@@ -123,15 +124,15 @@ def debug_set_up():
         import traceback, threading
 
         id2name = dict([(th.ident, th.name) for th in threading.enumerate()])
-        for threadId, stack in sys._current_frames().items():
-            print '\n# Thread: %s(%d)' %(id2name[threadId], threadId)
+        for threadId, stack in list(sys._current_frames().items()):
+            print('\n# Thread: %s(%d)' %(id2name[threadId], threadId))
             for filename, lineno, name, line in traceback.extract_stack(stack):
-                print 'File: "%s", line %d, in %s' %(filename, lineno, name)
+                print('File: "%s", line %d, in %s' %(filename, lineno, name))
                 if line:
-                    print '  %s' % (line.strip())
+                    print('  %s' % (line.strip()))
 
-    print "DEBUG: SIGUSR1 invokes the console.."
-    print "       SIGUSR2 prints a backtrace.."
+    print("DEBUG: SIGUSR1 invokes the console..")
+    print("       SIGUSR2 prints a backtrace..")
     signal.signal (signal.SIGUSR1, debug_callback)
     signal.signal (signal.SIGUSR2, trace_callback)
 
@@ -141,7 +142,7 @@ if __name__ == "__main__":
         scgi_port = sys.argv[1]
         cfg_file  = sys.argv[2]
     except:
-        print _("Incorrect parameters: PORT CONFIG_FILE")
+        print(_("Incorrect parameters: PORT CONFIG_FILE"))
         raise SystemExit
 
     # Debugging mode

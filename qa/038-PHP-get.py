@@ -12,7 +12,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "php4")
-        self.WriteFile (www, "php4/get.php", 0444, '<?php echo $_GET["magic"] ?>')
+        self.WriteFile (www, "php4/get.php", 0o444, '<?php echo $_GET["magic"] ?>')
 
     def Precondition (self):
         return os.path.exists (look_for_php())

@@ -53,8 +53,8 @@ class Test (TestBase):
         # Create the infrastructure
         #
         self.Mkdir (www, "digest3")
-        self.WriteFile (www, "digest3/file", 0444, MAGIC)
-        passfile = self.WriteFile (www, "digest3/.passwd", 0444, "%s:%s\n" % (USER, PASSWD1))
+        self.WriteFile (www, "digest3/file", 0o444, MAGIC)
+        passfile = self.WriteFile (www, "digest3/.passwd", 0o444, "%s:%s\n" % (USER, PASSWD1))
 
         # Set the configuration
         #

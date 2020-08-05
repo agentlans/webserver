@@ -1,7 +1,7 @@
 from base import *
 from util import *
 
-from cStringIO import StringIO
+from io import StringIO
 from gzip import GzipFile
 
 WEB_DIR = "gzip_EI16_1"
@@ -30,5 +30,5 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, WEB_DIR)
-        self.WriteFile (d, "file.txt", 0444, MAGIC)
+        self.WriteFile (d, "file.txt", 0o444, MAGIC)
 

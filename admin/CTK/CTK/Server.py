@@ -28,15 +28,15 @@ import types
 import errno
 import threading
 import traceback
-import urlparse
+import urllib.parse
 
-import pyscgi
-import Cookie
-import Config
+from . import pyscgi
+import http.cookies
+from . import Config
 
-from util import json_dump
-from Post import Post
-from HTTP import HTTP_Response, HTTP_Error
+from .util import json_dump
+from .Post import Post
+from .HTTP import HTTP_Response, HTTP_Error
 
 from cgi import escape as escape_html
 
@@ -61,10 +61,10 @@ class PostValidator:
 
                         try:
                             tmp = func (val)
-                        except UserWarning, e:
+                        except UserWarning as e:
                             errors[key] = str(e[0])
                             tmp = str(e[1])
-                        except Exception, e:
+                        except Exception as e:
                             errors[key] = str(e)
                             ret = "unsatisfactory"
                             break
@@ -127,7 +127,7 @@ class ServerHandler (pyscgi.SCGIHandler):
         my_thread.scgi_conn   = self
         my_thread.request_url = url
 
-        base_path = urlparse.urlsplit(url).path
+        base_path = urllib.parse.urlsplit(url).path
         if len(base_path) > 1 and base_path[-1] == '/':
             base_path = base_path[:-1]  # remove trailing '/' if it exists
 
@@ -160,7 +160,7 @@ class ServerHandler (pyscgi.SCGIHandler):
                     return self.response
 
                 elif type(ret) == dict:
-                    info = json_dump(dict(ret.items() + warnings.items()))
+                    info = json_dump(dict(list(ret.items()) + list(warnings.items())))
                     self.response += info
                     self.response['Content-Type'] = "application/json"
                     return self.response
@@ -179,7 +179,7 @@ class ServerHandler (pyscgi.SCGIHandler):
         def manage_exception():
             # Print the backtrace
             info = traceback.format_exc()
-            print >> sys.stderr, info
+            print(info, file=sys.stderr)
 
             # Custom error management
             if error.page:
@@ -188,8 +188,8 @@ class ServerHandler (pyscgi.SCGIHandler):
                     response = HTTP_Response (error=500, body=page.Render())
                     self.send (str(response))
                     return
-                except Exception, e:
-                    print "!!!!!!", e
+                except Exception as e:
+                    print("!!!!!!", e)
                     pass
 
             # No error handling page
@@ -200,13 +200,13 @@ class ServerHandler (pyscgi.SCGIHandler):
             content = self._do_handle()
             self.send (str(content))
 
-        except OSError, e:
+        except OSError as e:
             if e.errno == errno.EPIPE:
                 # The web server closed the SCGI socket
                 return
             manage_exception()
 
-        except Exception, desc:
+        except Exception as desc:
             manage_exception()
 
 
@@ -241,7 +241,7 @@ class Server:
         self._scgi = pyscgi.ServerFactory (*args, **kwargs)
 
         # Figure plug-in paths
-        from Plugin import figure_plugin_paths
+        from .Plugin import figure_plugin_paths
         self.plugin_paths = figure_plugin_paths()
 
     def sort_routes (self):
@@ -265,7 +265,7 @@ class Server:
                 if r._regex == route_obj._regex:
                     to_remove.append (r)
 
-            self._web_paths = filter (lambda x: x not in to_remove, self._web_paths)
+            self._web_paths = [x for x in self._web_paths if x not in to_remove]
 
             # Insert
             self._web_paths.append (route_obj)
@@ -281,7 +281,7 @@ class Server:
                 if r._regex == path:
                     to_remove.append (r)
 
-            self._web_paths = filter (lambda x: x not in to_remove, self._web_paths)
+            self._web_paths = [x for x in self._web_paths if x not in to_remove]
         finally:
             self.lock.release()
 
@@ -295,7 +295,7 @@ class Server:
         except KeyboardInterrupt:
             self.exiting = True
 
-        print "\r", "CTK Back-end Server exiting.."
+        print("\r", "CTK Back-end Server exiting..")
         self._scgi.server_close()
 
 
@@ -332,7 +332,7 @@ def get_scgi():
 
 def init (*args, **kwargs):
     # Init CTK
-    import Init
+    from . import Init
     Init.Init()
 
     # Server
@@ -379,7 +379,7 @@ def publish (regex_url, klass, **kwargs):
     """Publish a path given by the regex_url regular expression, and
     map it to the class of function given by the klass argument"""
     # Instance object
-    if type(klass) == types.ClassType:
+    if type(klass) == type:
         obj = klass()
     else:
         obj = Publish_FakeClass (klass)
@@ -410,7 +410,7 @@ class _Cookie:
     def get_val (self, name, default=None):
         my_thread = threading.currentThread()
         scgi = my_thread.scgi_conn
-        cookie = Cookie.SimpleCookie(scgi.env.get('HTTP_COOKIE', ''))
+        cookie = http.cookies.SimpleCookie(scgi.env.get('HTTP_COOKIE', ''))
         if name in cookie:
             return cookie[name].value
         else:

@@ -11,4 +11,4 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, "test.php", 0444, "<?php echo $_POST; ?>")
+        self.WriteFile (d, "test.php", 0o444, "<?php echo $_POST; ?>")

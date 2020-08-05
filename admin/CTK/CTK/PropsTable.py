@@ -20,14 +20,14 @@
 # 02110-1301, USA.
 #
 
-from Box import Box
-from Table import Table
-from Widget import Widget
-from RawHTML import RawHTML
-from Submitter import Submitter
-from Container import Container
-from HiddenField import HiddenField
-from util import *
+from .Box import Box
+from .Table import Table
+from .Widget import Widget
+from .RawHTML import RawHTML
+from .Submitter import Submitter
+from .Container import Container
+from .HiddenField import HiddenField
+from .util import *
 
 HTML_TABLE = """
 <div class="propstable">%s</div>

@@ -20,6 +20,6 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "auth3")
-        self.WriteFile (d, "passwd", 0444, 'Aladdin:open sesame\n')
+        self.WriteFile (d, "passwd", 0o444, 'Aladdin:open sesame\n')
 
         self.conf = CONF % (d+"/passwd")

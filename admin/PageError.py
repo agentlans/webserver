@@ -25,7 +25,7 @@
 import os
 import CTK
 
-from urllib import quote
+from urllib.parse import quote
 from configured import *
 
 ERROR_LAUNCH_URL_ADMIN = N_('The server suggests to check <a href="%s">this page</a>. Most probably the problem can be solved in there.')

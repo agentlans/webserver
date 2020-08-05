@@ -20,8 +20,8 @@
 # 02110-1301, USA.
 #
 
-from Widget import Widget
-from util import props_to_str
+from .Widget import Widget
+from .util import props_to_str
 
 class HiddenField (Widget):
     def __init__ (self, props={}):

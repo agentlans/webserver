@@ -26,4 +26,4 @@ class Test (TestBase):
         self.conf = CONF % (DIR_WEB, d)
 
         i = self.Mkdir (d, DIR_INSIDE)
-        self.WriteFile (i, "test_index.html", 0444, MAGIC)
+        self.WriteFile (i, "test_index.html", 0o444, MAGIC)

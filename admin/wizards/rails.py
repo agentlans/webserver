@@ -347,8 +347,8 @@ class Dispatcher (CTK.Container):
         if self._fcgi_ok():
             return
 
-        if self.errors.has_key('dispatch.fcgi'):
-            if self.errors.has_key('dispatch.fcgi.example'):
+        if 'dispatch.fcgi' in self.errors:
+            if 'dispatch.fcgi.example' in self.errors:
                 message = _(ERROR_DISPATCH) + _(ERROR_EXAMPLE)
             else:
                 message = _(ERROR_DISPATCH) + _(ERROR_RAILS23)
@@ -424,7 +424,7 @@ def is_ror_dir(path):
     elif os.path.exists(ror4_bin):
         return path
     else:
-        raise ValueError, _(ERROR_NO_ROR)
+        raise ValueError(_(ERROR_NO_ROR))
 
 def get_ror_version(path):
     path = validations.is_local_dir_exists (path)

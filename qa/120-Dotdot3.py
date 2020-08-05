@@ -12,4 +12,4 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "dotdot3/dir")
-        self.WriteFile (d, "file", 0444, MAGIC);
+        self.WriteFile (d, "file", 0o444, MAGIC);

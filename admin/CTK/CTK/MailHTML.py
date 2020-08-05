@@ -75,7 +75,7 @@ class MailHTML:
         for entry in self.chunks:
             kind, text, props = entry
 
-            if props.has_key('txt_only'):
+            if 'txt_only' in props:
                 continue
 
             if kind == 'raw':
@@ -105,7 +105,7 @@ class MailHTML:
         for entry in self.chunks:
             kind, text, props = entry
 
-            if props.has_key('html_only'):
+            if 'html_only' in props:
                 continue
 
             if kind == 'raw':
@@ -227,4 +227,4 @@ if __name__ == "__main__":
     mail.add ("This is the second one")
     mail.add ("And this is the last one")
 
-    print mail
+    print(mail)

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 # Cherokee CLI configuration conversion
 #
@@ -24,7 +24,7 @@ def main():
     try:
         cfg_file = sys.argv[1]
     except:
-        print "Incorrect parameters: %s CONFIG_FILE" % (sys.argv[0])
+        print("Incorrect parameters: %s CONFIG_FILE" % (sys.argv[0]))
         raise SystemExit
 
     # Parse the configuration file
@@ -34,17 +34,17 @@ def main():
     ver_config  = int (cfg.get_val('config!version', '000099028'))
     ver_release = int (config_version_get_current())
 
-    print "Upgrading '%s' from %d to %d.." % (cfg_file, ver_config, ver_release),
+    print("Upgrading '%s' from %d to %d.." % (cfg_file, ver_config, ver_release), end=' ')
 
     # Convert it
     updated = config_version_update_cfg (cfg)
-    print ["Not upgraded.", "Upgraded."][updated]
+    print(["Not upgraded.", "Upgraded."][updated])
 
     # Save it
     if updated:
-        print "Saving new configuration..",
+        print("Saving new configuration..", end=' ')
         cfg.save()
-        print "OK"
+        print("OK")
 
 if __name__ == '__main__':
     main()

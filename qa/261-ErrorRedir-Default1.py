@@ -48,5 +48,5 @@ class Test (TestBase):
         rep['droot'] = droot
         self.conf = CONF %(rep)
 
-        self.WriteFile (static, FILE_3xx,     0644, ERROR_3xx)
-        self.WriteFile (static, FILE_DEFAULT, 0644, ERROR_DEFAULT)
+        self.WriteFile (static, FILE_3xx,     0o644, ERROR_3xx)
+        self.WriteFile (static, FILE_DEFAULT, 0o644, ERROR_DEFAULT)

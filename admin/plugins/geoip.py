@@ -40,7 +40,7 @@ def commit():
     vsrv_num  = CTK.post.pop ('vsrv_num', None)
 
     # New
-    post_keys = CTK.post.keys()
+    post_keys = list(CTK.post.keys())
     selected  = []
     for p in post_keys:
         if p.startswith('tmp!countries!'):

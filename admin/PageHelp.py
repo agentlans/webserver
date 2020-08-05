@@ -87,14 +87,14 @@ class Parser:
             return len(y) - len(x)
 
         def is_covered (val):
-            for key,vals in self.tree.items():
+            for key,vals in list(self.tree.items()):
                 if val in vals:
                     return True
             return False
 
         def tree_len ():
             tmp = []
-            for vals in self.tree.values():
+            for vals in list(self.tree.values()):
                 tmp.extend(vals)
             return len(tmp)
 

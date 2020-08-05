@@ -30,7 +30,7 @@ class Test (TestBase):
         self.vsdr = self.Mkdir (www, "directoryoverwrite")
         self.rldr = self.Mkdir (www, "directoryinside")
 
-        self.WriteFile (self.rldr, "index.html", 0666, MAGIC)
+        self.WriteFile (self.rldr, "index.html", 0o666, MAGIC)
 
         # Set the configuration
         self.conf = CONF % (self.vsdr, self.rldr)

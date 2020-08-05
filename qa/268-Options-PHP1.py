@@ -17,7 +17,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, FILE, 0444,
+        self.WriteFile (d, FILE, 0o444,
                         "<?php /* %(FORBIDDEN)s */ echo '%(CONTENT)s'; ?>" %(globals()))
 
     def Precondition (self):

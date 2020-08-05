@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 ##
 ## Cherokee trace colorizer
@@ -32,7 +32,7 @@ def build_colors():
 def thread_color (thread):
     global _threads
     global _color_n
-    if not thread in _threads.keys():
+    if not thread in list(_threads.keys()):
         color = _colors[_color_n]
         _threads[thread] = color
         _color_n += 1
@@ -60,7 +60,7 @@ def main():
             line = line.replace(w, HIGHLIGHT + w + RESET_COLOR)
 
         # Nothing else to do..
-        print line,
+        print(line, end=' ')
 
 if __name__ == '__main__':
     main()

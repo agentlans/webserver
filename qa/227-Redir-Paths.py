@@ -30,7 +30,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d  = self.Mkdir (www, "%s_droot/in"%(SERVER))
-        self.WriteFile (d, "internal.txt", 0444, MAGIC)
+        self.WriteFile (d, "internal.txt", 0o444, MAGIC)
 
         self.conf = CONF % (SERVER, d)
 

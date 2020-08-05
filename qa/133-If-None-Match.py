@@ -12,7 +12,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "if_none_match1")
-        self.WriteFile (d, "test.php", 0444, """<?php
+        self.WriteFile (d, "test.php", 0o444, """<?php
            if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == '%s') {
               header('HTTP/1.0 304 Not Modified');
 	         exit();

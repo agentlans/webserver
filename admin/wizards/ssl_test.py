@@ -61,7 +61,7 @@ class Commit:
             if not os.path.exists (cert_dir):
                 try:
                     os.makedirs (cert_dir)
-                except Exception, e:
+                except Exception as e:
                     return {'ret': 'error', 'errors': {'%s!gen_autosigned_cert'%(PREFIX): str(e)}}
 
             # Cert files

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Cherokee QA Tests
@@ -15,13 +15,14 @@ import time
 import copy
 import signal
 import shutil
-import thread
+import _thread
 import string
 import random
 import tempfile
 
 from base import *
 from help import *
+import imp
 
 try:
     # Try to load a local configuration
@@ -32,7 +33,7 @@ except ImportError:
 
 # Deals with UTF-8
 if sys.getdefaultencoding() != 'utf-8':
-    reload (sys)
+    imp.reload (sys)
     sys.setdefaultencoding('utf-8')
 
 # Configuration parameters
@@ -66,7 +67,7 @@ tmp = www + "/_tmp/"
 pid = tmp + "cherokee.pid"
 os.makedirs (tmp)
 
-map (lambda x: os.chmod (x, 0777), [www, tmp])
+list(map (lambda x: os.chmod (x, 0o777), [www, tmp]))
 
 # Make the files list
 files   = []
@@ -74,15 +75,15 @@ param   = []
 skipped = []
 if len(sys.argv) > 1:
     argv = sys.argv[1:]
-    files = filter (lambda x: x[0] != '-', argv)
-    param = filter (lambda x: x[0] == '-', argv)
+    files = [x for x in argv if x[0] != '-']
+    param = [x for x in argv if x[0] == '-']
 
 # If not files were specified, use all of them
 if len(files) == 0:
     files = os.listdir('.')
-    files = filter (lambda x: x[-3:] == '.py', files)
-    files = filter (lambda x: x[3] == '-', files)
-    files = filter (lambda x: x[2] in string.digits, files)
+    files = [x for x in files if x[-3:] == '.py']
+    files = [x for x in files if x[3] == '-']
+    files = [x for x in files if x[2] in string.digits]
     files.sort()
 
 # Process the parameters
@@ -118,22 +119,22 @@ if help:
     sys.exit(1)
 
 # Fix up pause
-if type(pause) == types.StringType:
+if type(pause) == bytes:
     if len(pause) > 0:
         pause = int(pause)
     else:
-        pause = sys.maxint
+        pause = sys.maxsize
 
 # Check threads and pauses
 if thds > 1 and pause > 1:
-    print "ERROR: -d and -t are incompatible with each other."
+    print("ERROR: -d and -t are incompatible with each other.")
     sys.exit(1)
 
 # Check the interpreters
 php_interpreter    = look_for_php()
 python_interpreter = look_for_python()
 
-print "Interpreters"
+print("Interpreters")
 if php_interpreter:
     print_key('PHP', php_interpreter)
 else:
@@ -143,7 +144,7 @@ if python_interpreter:
     print_key('Python', python_interpreter)
 else:
     print_key('Python', "ERROR: Python interpreter not found")
-print
+print()
 
 # Might need to fake PHP
 fake_php = len(php_interpreter) == 0
@@ -352,12 +353,12 @@ if port is None:
             name = server[server.rfind('/') + 1:]
 
             env = os.environ
-            if not env.has_key('CHEROKEE_PANIC_OUTPUT'):
+            if 'CHEROKEE_PANIC_OUTPUT' not in env:
                 env['CHEROKEE_PANIC_OUTPUT'] = 'stdout'
 
             os.execle (server, name, "-C", cfg_file, env)
     else:
-        print "Server"
+        print("Server")
         print_key ('PID', str(pid));
         print_key ('Path',   CHEROKEE_PATH)
         print_key ('Mods',   CHEROKEE_MODS)
@@ -366,7 +367,7 @@ if port is None:
         print_key ('Themes', CHEROKEE_THEMES)
         if proxy_cfg_file:
             print_key ('Proxy conf', proxy_cfg_file)
-        print
+        print()
 
         if memproc:
             cmd = 'xterm -e "             \
@@ -390,7 +391,7 @@ def clean_up():
     if its_clean: return
     its_clean = True
 
-    print
+    print()
 
     # Clean up
     if clean:
@@ -399,27 +400,27 @@ def clean_up():
     else:
         print_key ("Testdir", www)
         print_key ("Config",  cfg_file)
-        print
+        print()
 
     # Skipped tests
     if not quiet:
-        print "Skipped tests: %d" % (len(skipped))
+        print("Skipped tests: %d" % (len(skipped)))
 
     # Kill the server
     if kill and pid > 0:
-        print "Sending SIGTERM.."
+        print("Sending SIGTERM..")
         os.kill (pid, signal.SIGTERM)
         if valgrind != None:
             linger = 8
         else:
             linger = 4
         count_down ("Will kill the server in %d secs", linger)
-        print "Sending SIGKILL.."
+        print("Sending SIGKILL..")
         os.kill (pid, signal.SIGKILL)
 
 def do_pause():
     global pause
-    print "Press <Enter> to continue.."
+    print("Press <Enter> to continue..")
     sys.stdin.readline()
     pause = pause - 1
 
@@ -452,16 +453,16 @@ def mainloop_iterator (objs, main_thread=True):
                     do_pause()
 
             if not quiet:
-                if ssl: print "SSL:",
-                print "%s: " % (obj.name) + " "*(40 - len(obj.name)),
+                if ssl: print("SSL:", end=' ')
+                print("%s: " % (obj.name) + " "*(40 - len(obj.name)), end=' ')
                 sys.stdout.flush()
 
             if not go_ahead:
                 if not quiet:
                     if obj.disabled:
-                        print MESSAGE_DISABLED
+                        print(MESSAGE_DISABLED)
                     else:
-                        print MESSAGE_SKIPPED
+                        print(MESSAGE_SKIPPED)
                     if not obj in skipped:
                         skipped.append(obj)
                 continue
@@ -470,26 +471,26 @@ def mainloop_iterator (objs, main_thread=True):
                 obj.JustBefore(www)
                 ret = obj.Run (client_host, client_port)
                 obj.JustAfter(www)
-            except Exception, e:
+            except Exception as e:
                 if not its_clean:
-                    print e
+                    print(e)
                     print_sec(obj)
                     clean_up()
                 sys.exit(1)
 
             if ret is not 0:
                 if not its_clean:
-                    print MESSAGE_FAILED
+                    print(MESSAGE_FAILED)
                     print_sec (obj)
                     clean_up()
                 sys.exit(1)
             elif not quiet:
-                print MESSAGE_SUCCESS
+                print(MESSAGE_SUCCESS)
                 obj.Clean()
 
             if main_thread and tpause > 0.0:
                 if not quiet:
-                    print "Sleeping %2.2f seconds..\r" % (tpause),
+                    print("Sleeping %2.2f seconds..\r" % (tpause), end=' ')
                     sys.stdout.flush()
                 time.sleep (tpause)
 
@@ -506,7 +507,7 @@ for n in range(thds-1):
 
     # Launch the thread
     objs_copy = copy.deepcopy(objs)
-    thread.start_new_thread (mainloop_iterator, (objs_copy, False))
+    _thread.start_new_thread (mainloop_iterator, (objs_copy, False))
 
 # Execute the tests
 mainloop_iterator(objs)

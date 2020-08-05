@@ -39,7 +39,7 @@ class Test (TestBase):
         for php in self.php_conf.split("\n"):
             self.conf += "vserver!1160!rule!%s\n" % (php)
 
-        self.WriteFile (host_dir, "index.php", 0444, '<?php echo "%s" ?>' %(MAGIC))
+        self.WriteFile (host_dir, "index.php", 0o444, '<?php echo "%s" ?>' %(MAGIC))
 
     def Precondition (self):
         return os.path.exists (look_for_php())

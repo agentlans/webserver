@@ -47,7 +47,7 @@ class Test (TestBase):
         self.forbidden_content = ['from fcgi', 'start_response']
 
     def Prepare (self, www):
-        fcgi_file = self.WriteFile (www, "fcgi_test_vbles.fcgi", 0444, SCRIPT)
+        fcgi_file = self.WriteFile (www, "fcgi_test_vbles.fcgi", 0o444, SCRIPT)
 
         fcgi = os.path.join (www, 'fcgi.py')
         if not os.path.exists (fcgi):

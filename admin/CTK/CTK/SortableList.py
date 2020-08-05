@@ -20,10 +20,10 @@
 # 02110-1301, USA.
 #
 
-from Table import Table
-from Server import get_server
-from PageCleaner import Uniq_Block
-from Server import publish, post, cfg, cfg_reply_ajax_ok
+from .Table import Table
+from .Server import get_server
+from .PageCleaner import Uniq_Block
+from .Server import publish, post, cfg, cfg_reply_ajax_ok
 
 HEADER = [
     '<script type="text/javascript" src="/CTK/js/jquery.tablednd_0_5.js"></script>'

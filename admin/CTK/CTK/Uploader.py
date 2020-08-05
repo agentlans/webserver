@@ -24,9 +24,9 @@ import os
 import tempfile
 from cgi import FieldStorage
 
-from Server import publish, get_scgi
-from Widget import Widget
-from PageCleaner import Uniq_Block
+from .Server import publish, get_scgi
+from .Widget import Widget
+from .PageCleaner import Uniq_Block
 
 
 HEADERS = [

@@ -20,8 +20,8 @@
 # 02110-1301, USA.
 #
 
-from Widget import Widget
-from Container import Container
+from .Widget import Widget
+from .Container import Container
 
 
 class HelpEntry (Widget):

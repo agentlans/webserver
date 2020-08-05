@@ -24,4 +24,4 @@ class Test (TestBase):
         test_dir = self.Mkdir (www, DIR)
         self.conf = CONF.replace('<dir>', '/'+DIR)
 
-        self.WriteFile (test_dir, "file", 0444)
+        self.WriteFile (test_dir, "file", 0o444)

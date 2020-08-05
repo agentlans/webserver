@@ -36,7 +36,7 @@ class Test (TestBase):
 
         # Read the /etc/passwd file
         f = open ("/etc/passwd", "r")
-        pwuser = filter(lambda x: x.find(self.user) == 0, f.readlines())
+        pwuser = [x for x in f.readlines() if x.find(self.user) == 0]
         f.close()
 
         # Sanity check

@@ -17,5 +17,5 @@ class Test (TestBase):
 
     def Prepare (self, www):
         random  = letters_random (LENGTH)
-        self.WriteFile (www, "BadRange1", 0444, random)
+        self.WriteFile (www, "BadRange1", 0o444, random)
 

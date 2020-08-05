@@ -22,5 +22,5 @@ class Test (TestBase):
         self.forbidden_content = MAGIC[OFFSET:]
 
     def Prepare (self, www):
-        self.WriteFile (www, "Range100b2", 0444, MAGIC)
+        self.WriteFile (www, "Range100b2", 0o444, MAGIC)
 

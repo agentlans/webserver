@@ -33,7 +33,7 @@ def e (error_id, title, **kwargs):
     # Check dup. errors
     for err in _errors:
         if error_id == err.id:
-            raise ValueError, "ERROR: Duplicated error %s" %(error_id)
+            raise ValueError("ERROR: Duplicated error %s" %(error_id))
 
     # New error
     kwargs['id']    = error_id
@@ -73,20 +73,20 @@ def check_source_code (dirs):
     # Undefined errors in the source code
     error_found = False
 
-    for s in errors_seen.keys():
+    for s in list(errors_seen.keys()):
         found = False
         for e in _errors:
             if s == e.id:
                 found = True
                 break
         if not found:
-            print >> sys.stderr, "Undefined Error: CHEROKEE_ERROR_%s, used in %s" % (s, errors_seen[s])
+            print("Undefined Error: CHEROKEE_ERROR_%s, used in %s" % (s, errors_seen[s]), file=sys.stderr)
             error_found = True
 
     # Unused errors in the definition file
     for def_e in _errors:
         if not def_e.__seen_in_grep:
-            print >> sys.stderr, "Unused Error: CHEROKEE_ERROR_%s" % (def_e.id)
+            print("Unused Error: CHEROKEE_ERROR_%s" % (def_e.id), file=sys.stderr)
             error_found = True
 
     return error_found
@@ -135,7 +135,7 @@ def check_parameters (dirs):
                     for param in internal_params:
                         tmp = tmp.replace(param, '')
 
-                params_num = len (filter (lambda x: len(x), tmp.split(',')))
+                params_num = len ([x for x in tmp.split(',') if len(x)])
                 source_errors_params[error] = params_num
 
     # Compare both
@@ -145,7 +145,7 @@ def check_parameters (dirs):
         source_num = source_errors_params[error.id]
         known_num  = known_errors_params[error.id]
         if source_num != known_num:
-            print >> sys.stderr, "ERROR: Parameter number mismatch: %s (source %d, definition %d)" % (error.id, source_num, known_num)
+            print("ERROR: Parameter number mismatch: %s (source %d, definition %d)" % (error.id, source_num, known_num), file=sys.stderr)
             error_found = True
 
     return error_found
@@ -243,14 +243,14 @@ def main():
         error = True
 
     if error:
-        print "USAGE:"
-        print
-        print " * Create the definitions file:"
-        print "    %s [--skip-tests] --defines output_file" %(sys.argv[0])
-        print
-        print " * Create the error list file:"
-        print "    %s [--skip-tests] --errors output_file" %(sys.argv[0])
-        print
+        print("USAGE:")
+        print()
+        print(" * Create the definitions file:")
+        print("    %s [--skip-tests] --defines output_file" %(sys.argv[0]))
+        print()
+        print(" * Create the error list file:")
+        print("    %s [--skip-tests] --errors output_file" %(sys.argv[0]))
+        print()
         sys.exit(1)
 
     # Perform

@@ -58,7 +58,7 @@ class Test (TestBase):
         # Create the infrastructure
         #
         test_dir = self.Mkdir (www, DIR)
-        self.WriteFile (test_dir, "file", 0444, MAGIC)
+        self.WriteFile (test_dir, "file", 0o444, MAGIC)
 
         # Prepare the password file
         #
@@ -66,7 +66,7 @@ class Test (TestBase):
         md5obj.update("%s:%s:%s" % (USER, REALM, PASSWD))
         password = md5obj.hexdigest()
 
-        passfile = self.WriteFile (test_dir, ".passwd", 0444, "%s:%s:%s\n" % (USER, REALM, password))
+        passfile = self.WriteFile (test_dir, ".passwd", 0o444, "%s:%s:%s\n" % (USER, REALM, password))
 
         # Set the configuration
         #

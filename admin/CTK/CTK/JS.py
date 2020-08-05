@@ -26,7 +26,7 @@
 The CTK.JS module wraps several utility Javascript functions.
 """
 
-from Server import get_server
+from .Server import get_server
 
 def Ajax (url, data='', type='POST', async=True, dataType='json',
           success=None, error=None, complete=None):

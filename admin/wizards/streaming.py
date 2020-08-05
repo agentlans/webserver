@@ -111,7 +111,7 @@ class NextStep (CTK.Container):
             self += CTK.DruidButtonsPanel_Cancel()
 
     def _can_proceed (self):
-        mods = filter(lambda x: 'streaming' in x, os.listdir(CHEROKEE_PLUGINDIR))
+        mods = [x for x in os.listdir(CHEROKEE_PLUGINDIR) if 'streaming' in x]
         if not len(mods):
             self._msg = _("The media streaming plug-in is not installed.")
             return False

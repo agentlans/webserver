@@ -10,7 +10,7 @@ class MyHandler(SCGIHandler):
 
     def print_env (self):
         self.send('<table border="0">')
-        for k, v in self.env.items():
+        for k, v in list(self.env.items()):
             self.send('<tr><td><b>%s</b></td><td>%r</td></tr>' % (k, v))
         self.send('</table')
 

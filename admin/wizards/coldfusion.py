@@ -29,7 +29,7 @@
 #
 
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import CTK
 import Wizard
 import validations
@@ -228,14 +228,14 @@ class Welcome:
 def is_coldfusion_host (host):
     host = validations.is_information_source (host)
     try:
-        cf_host = urllib.urlopen("http://%s" % host)
+        cf_host = urllib.request.urlopen("http://%s" % host)
     except:
-        raise ValueError, _(ERROR_NO_SRC)
+        raise ValueError(_(ERROR_NO_SRC))
 
     headers = str(cf_host.headers).lower()
     cf_host.close()
     if not "jrun" in headers:
-        raise ValueError, _(ERROR_NO_SRC)
+        raise ValueError(_(ERROR_NO_SRC))
     return host
 
 VALS = [

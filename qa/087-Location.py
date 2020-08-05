@@ -12,7 +12,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "phplocation")
-        self.WriteFile (www, "phplocation/redir.php", 0444,
+        self.WriteFile (www, "phplocation/redir.php", 0o444,
                         '<?php header("Location: src/login.php"); ?>')
 
     def Precondition (self):

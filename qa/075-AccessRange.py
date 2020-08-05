@@ -22,5 +22,5 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "allow_range1")
-        self.WriteFile (www, "allow_range1/file", 0444, MAGIC)
+        self.WriteFile (www, "allow_range1/file", 0o444, MAGIC)
 

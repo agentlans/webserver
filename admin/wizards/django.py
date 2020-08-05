@@ -268,7 +268,7 @@ def is_django_dir (path):
     try:
         validations.is_local_file_exists (manage)
     except:
-        raise ValueError, _("Directory doesn't look like a Django based project.")
+        raise ValueError(_("Directory doesn't look like a Django based project."))
     return path
 
 

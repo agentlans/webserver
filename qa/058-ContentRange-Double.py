@@ -26,4 +26,4 @@ class Test (TestBase):
             return -1
 
     def Prepare (self, www):
-        self.WriteFile (www, "Range100Both", 0444, MAGIC)
+        self.WriteFile (www, "Range100Both", 0o444, MAGIC)

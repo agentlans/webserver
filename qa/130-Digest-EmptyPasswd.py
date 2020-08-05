@@ -52,8 +52,8 @@ class Test (TestBase):
         # Create the infrastructure
         #
         self.Mkdir (www, "digest_empty")
-        self.WriteFile (www, "digest_empty/file", 0444, MAGIC)
-        passfile = self.WriteFile (www, "digest_empty/.passwd", 0444, "%s:%s\n" % (USER, PASSWD))
+        self.WriteFile (www, "digest_empty/file", 0o444, MAGIC)
+        passfile = self.WriteFile (www, "digest_empty/.passwd", 0o444, "%s:%s\n" % (USER, PASSWD))
 
         # Set the configuration
         #

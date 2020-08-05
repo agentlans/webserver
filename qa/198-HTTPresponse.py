@@ -30,4 +30,4 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, DIR)
-        self.WriteFile (www, "%s/test"%(DIR), 0755, CGI_BASE)
+        self.WriteFile (www, "%s/test"%(DIR), 0o755, CGI_BASE)

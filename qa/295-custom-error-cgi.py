@@ -28,6 +28,6 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DOMAIN)
-        self.WriteFile (d, "404.sh", 0755, "#!/bin/sh\necho -e 'HTTP/1.0 200 OK\r\nStatus: 200 OK\r\n\r\n" + CONTENT_404 + "'")
+        self.WriteFile (d, "404.sh", 0o755, "#!/bin/sh\necho -e 'HTTP/1.0 200 OK\r\nStatus: 200 OK\r\n\r\n" + CONTENT_404 + "'")
 
         self.conf = CONF % (DOMAIN, d)

@@ -21,10 +21,10 @@
 #
 
 import types
-import util
-from consts import *
-from Widget import Widget
-from Server import publish, get_scgi
+from . import util
+from .consts import *
+from .Widget import Widget
+from .Server import publish, get_scgi
 
 HTML = """
 <div id="%(id_widget)s" %(extra_props)s></div>

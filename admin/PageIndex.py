@@ -33,8 +33,8 @@ import About
 
 import os
 import time
-import urllib
-import urllib2
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 import re
 
 from util import *

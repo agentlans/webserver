@@ -16,5 +16,5 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        f = self.WriteFile (d, "index.html", 0444, CONTENT)
+        f = self.WriteFile (d, "index.html", 0o444, CONTENT)
 

@@ -66,7 +66,7 @@ def popen_sync (command, env=None, stdout=True, stderr=True, retcode=True, cd=No
         os.dup2 (stderr_w, 2)
 
         # Close fds
-        for i in xrange(3, MAXFD):
+        for i in range(3, MAXFD):
             try:
                 os.close (i)
             except:
@@ -76,17 +76,17 @@ def popen_sync (command, env=None, stdout=True, stderr=True, retcode=True, cd=No
         if cd:
             try:
                 os.chdir (cd)
-            except Except, e:
-                print >> sys.stderr, "Could not change directory to: %s" %(cd)
-                print >> sys.stderr, traceback.format_exc()
+            except Except as e:
+                print("Could not change directory to: %s" %(cd), file=sys.stderr)
+                print(traceback.format_exc(), file=sys.stderr)
 
         # Change user
         if su:
             try:
                 os.setuid (su)
-            except Except, e:
-                print >> sys.stderr, "Could not set user: %s" %(su)
-                print >> sys.stderr, traceback.format_exc()
+            except Except as e:
+                print("Could not set user: %s" %(su), file=sys.stderr)
+                print(traceback.format_exc(), file=sys.stderr)
 
         # Pass control to the executable
         if not env:
@@ -109,7 +109,7 @@ def popen_sync (command, env=None, stdout=True, stderr=True, retcode=True, cd=No
             data = ''
             try:
                 data = os.read (stderr_r, READ_CHUNK_SIZE)
-            except OSError, e:
+            except OSError as e:
                 if e[0] in (errno.EAGAIN,):
                     raise
             if data:
@@ -119,7 +119,7 @@ def popen_sync (command, env=None, stdout=True, stderr=True, retcode=True, cd=No
             data = ''
             try:
                 data = os.read (stdout_r, READ_CHUNK_SIZE)
-            except OSError, e:
+            except OSError as e:
                 if e[0] in (errno.EAGAIN,):
                     raise
             if data:
@@ -134,7 +134,7 @@ def popen_sync (command, env=None, stdout=True, stderr=True, retcode=True, cd=No
                 elif os.WIFEXITED(sts):
                     returncode = os.WEXITSTATUS(sts)
                 break
-        except OSError, e:
+        except OSError as e:
             returncode = None
             break
 
@@ -156,6 +156,6 @@ def popen_sync (command, env=None, stdout=True, stderr=True, retcode=True, cd=No
     return ret
 
 if __name__ == "__main__":
-    print popen_sync ("ls")
-    print popen_sync ("lsg")
-    print popen_sync ("""cat <<EOF\nThis\nis\na\ntest\nEOF\n""")
+    print(popen_sync ("ls"))
+    print(popen_sync ("lsg"))
+    print(popen_sync ("""cat <<EOF\nThis\nis\na\ntest\nEOF\n"""))

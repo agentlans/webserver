@@ -92,7 +92,7 @@ class PID:
         # Try to find the Cherokee process
         for l in ps.split("\n"):
             if "cherokee " in l and "-C %s"%(CTK.cfg.file) in l:
-                pid = filter (lambda x: x.isdigit(), l.split())[0]
+                pid = [x for x in l.split() if x.isdigit()][0]
                 self.pid = int(pid)
 
 
@@ -154,7 +154,7 @@ class Server:
                 data = ''
                 try:
                     data = os.read (stdout_fd, READ_CHUNK_SIZE)
-                except OSError, e:
+                except OSError as e:
                     if e[0] in (errno.EAGAIN,):
                         raise
                 if data:
@@ -165,7 +165,7 @@ class Server:
                 data = ''
                 try:
                     data = os.read (stderr_fd, READ_CHUNK_SIZE)
-                except OSError, e:
+                except OSError as e:
                     if e[0] in (errno.EAGAIN,):
                         raise
                 if data:
@@ -212,7 +212,7 @@ class Support:
 
     def has_plugin (self, name):
         try:
-            mods = filter(lambda x: name in x, os.listdir(CHEROKEE_PLUGINDIR))
+            mods = [x for x in os.listdir(CHEROKEE_PLUGINDIR) if name in x]
             if len(mods) >= 1:
                 return True
         except:
@@ -290,7 +290,7 @@ def _pid_kill (pid):
         try:
             os.waitpid (pid, 0)
             return True
-        except OSError, e:
+        except OSError as e:
             if e[0] == errno.ECHILD:
                 return True
             time.sleep (0.5)

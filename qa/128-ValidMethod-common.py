@@ -24,7 +24,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        f = self.WriteFile (d, "test_index.php", 0444,
+        f = self.WriteFile (d, "test_index.php", 0o444,
                             "<?php echo 'Post: '.$_POST['var']; ?>")
 
     def Precondition (self):

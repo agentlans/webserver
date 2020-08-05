@@ -15,6 +15,6 @@ class Test (TestBase):
         self.expected_error   = 200
 
     def Prepare (self, www):
-        f = self.WriteFile (www, "100k", 0444, str_random (LENGTH))
+        f = self.WriteFile (www, "100k", 0o444, str_random (LENGTH))
         self.expected_content = "file:" + f
 

@@ -217,7 +217,7 @@ def main():
             print(__doc__)
             sys.exit(0)
         if o in ('--version', '-v'):
-            print('code-filter version %s' % (VERSION,))
+            print(('code-filter version %s' % (VERSION,)))
             sys.exit(0)
         if o == '-b':
             backend = v

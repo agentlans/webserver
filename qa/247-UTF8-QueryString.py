@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from base import *
-from urllib import quote
+from urllib.parse import quote
 
 UTF8   = "¿Quién Está al Teléfono?"
 DIR    = "querystring-utf8-1"
@@ -32,4 +32,4 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, "exec.cgi", 0755, CGI_BASE)
+        self.WriteFile (d, "exec.cgi", 0o755, CGI_BASE)

@@ -20,9 +20,9 @@
 # 02110-1301, USA.
 #
 
-from util import *
-from Widget import Widget
-from Container import Container
+from .util import *
+from .Widget import Widget
+from .Container import Container
 
 
 class TableField (Container):
@@ -70,7 +70,7 @@ class TableRow (Widget):
 
     def __getitem__ (self, num):
         if num > self.length:
-            raise IndexError, "Column number out of bounds (get)"
+            raise IndexError("Column number out of bounds (get)")
 
         return self.entries[num-1]
 
@@ -81,7 +81,7 @@ class TableRow (Widget):
 
     def grow_to (self, col):
         if col < 1:
-            raise IndexError, "Column number out of bounds"
+            raise IndexError("Column number out of bounds")
 
         if col > self.length:
             self.entries += [None] * (col - self.length)
@@ -143,7 +143,7 @@ class Table (Widget):
 
     def __grow_if_needed (self, row, col):
         if row < 1:
-            raise IndexError, "Row number out of bounds"
+            raise IndexError("Row number out of bounds")
 
         while row > self.last_row:
             self.__add_row()
@@ -192,7 +192,7 @@ class Table (Widget):
         row,col = pos
 
         if row > self.last_row:
-            raise IndexError, "Row number out of bounds (get)"
+            raise IndexError("Row number out of bounds (get)")
 
         return self.rows[row-1][col]
 
@@ -270,9 +270,9 @@ class TableFixed (Table):
         row,col = pos
 
         if row > self._fixed_rows:
-            raise IndexError, "Row number out of bounds"
+            raise IndexError("Row number out of bounds")
 
         if col > self._fixed_cols:
-            raise IndexError, "Column number out of bounds"
+            raise IndexError("Column number out of bounds")
 
         return Table.__setitem__ (self, pos, item)

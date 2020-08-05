@@ -20,9 +20,9 @@
 # 02110-1301, USA.
 #
 
-from Widget import Widget
-from Server import cfg
-from util import *
+from .Widget import Widget
+from .Server import cfg
+from .util import *
 
 HEADERS = [
     '<script type="text/javascript" src="/CTK/js/jquery.ibutton.js"></script>',

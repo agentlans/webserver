@@ -35,6 +35,6 @@ class Test (TestBase):
         self.conf              = CONF
 
     def Prepare (self, www):
-        self.WriteFile (www, FILE1, 0555, FORBIDDEN)
-        self.WriteFile (www, FILE2, 0555, CGI_BASE % (MAGIC))
+        self.WriteFile (www, FILE1, 0o555, FORBIDDEN)
+        self.WriteFile (www, FILE2, 0o555, CGI_BASE % (MAGIC))
 

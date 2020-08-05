@@ -32,4 +32,4 @@ class Test (TestBase):
         test_dir = self.Mkdir (www, DIR)
         self.conf = CONF.replace('<dir>', test_dir)
 
-        self.WriteFile (test_dir, "Range100Both", 0444, MAGIC)
+        self.WriteFile (test_dir, "Range100Both", 0o444, MAGIC)

@@ -54,7 +54,7 @@ class Wizard (CTK.Box):
         CTK.Box.__init__ (self, props)
 
     def show (self):
-        raise NotImplementedError, 'Wizard.show must be implemented'
+        raise NotImplementedError('Wizard.show must be implemented')
 
 
 class Wizard_Rule (CTK.Box):
@@ -160,7 +160,7 @@ class CategoryList_Widget (CTK.Box):
         wlist = CTK.List({'class': 'wizard-list'})
 
         # Find the right group
-        tmp = filter (lambda g: g['name'] == category, wizard_list)
+        tmp = [g for g in wizard_list if g['name'] == category]
         if tmp:
             for w in tmp[0]['list']:
                 descr, title = w['descr'], w['title']

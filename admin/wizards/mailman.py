@@ -220,14 +220,14 @@ def is_mailman_data_dir (path):
     path = validations.is_local_dir_exists (path)
     file = os.path.join (path, "bin/newlist")
     if not os.path.exists (file):
-        raise ValueError, _("It does not look like a Mailman data directory.")
+        raise ValueError(_("It does not look like a Mailman data directory."))
     return path
 
 def is_mailman_cgi_dir (path):
     path = validations.is_local_dir_exists (path)
     file = os.path.join (path, "listinfo")
     if not os.path.exists (file):
-        raise ValueError, _("It does not look like a Mailman CGI directory.")
+        raise ValueError(_("It does not look like a Mailman CGI directory."))
     return path
 
 def is_mailman_arch_dir (path):
@@ -236,14 +236,14 @@ def is_mailman_arch_dir (path):
     try:
         validations.is_local_dir_exists (file)
     except:
-        raise ValueError, _("It does not look like a Mailman archive directory.")
+        raise ValueError(_("It does not look like a Mailman archive directory."))
     return path
 
 def is_mailman_imgs_dir (path):
     path = validations.is_local_dir_exists (path)
     file = os.path.join (path, "mailman.jpg")
     if not os.path.exists (file):
-        raise ValueError, _("It does not look like a Mailman images directory.")
+        raise ValueError(_("It does not look like a Mailman images directory."))
     return path
 
 

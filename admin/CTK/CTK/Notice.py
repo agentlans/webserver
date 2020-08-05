@@ -20,8 +20,8 @@
 # 02110-1301, USA.
 #
 
-from Container import Container
-from util import props_to_str
+from .Container import Container
+from .util import props_to_str
 
 NOTICE_TYPES = ['information', 'important-information',
                 'warning', 'error', 'offline', 'online']

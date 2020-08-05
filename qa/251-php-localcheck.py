@@ -45,7 +45,7 @@ class Test (TestBase):
         document_root = self.Mkdir (www, "test251_outside")
         internal_dir  = self.Mkdir (www, "test251_outside/internal")
 
-        self.WriteFile (internal_dir, "test.php", 0666, PHP_SRC)
+        self.WriteFile (internal_dir, "test.php", 0o666, PHP_SRC)
 
         # Config
         php_plus1 = int(self.php_conf.split('!')[0]) + 1

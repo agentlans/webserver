@@ -25,7 +25,7 @@
 import os
 import sys
 import types
-import __builtin__
+import builtins
 
 # Global
 active_lang = ''
@@ -33,11 +33,11 @@ active_lang = ''
 #
 # Init
 #
-if not __builtin__.__dict__.has_key('_'):
-    __builtin__.__dict__['_'] = lambda x: x
+if '_' not in builtins.__dict__:
+    builtins.__dict__['_'] = lambda x: x
 
-if not __builtin__.__dict__.has_key('N_'):
-    __builtin__.__dict__['N_'] = lambda x: x
+if 'N_' not in builtins.__dict__:
+    builtins.__dict__['N_'] = lambda x: x
 
 try:
     import gettext
@@ -50,14 +50,14 @@ except ImportError:
 #
 def underscore_wrapper (x):
     # Feed unicode
-    if type(x) != types.UnicodeType:
-        x = unicode(x, 'UTF-8')
+    if type(x) != str:
+        x = str(x, 'UTF-8')
 
     # Translate using the original gettext function
-    re = __builtin__.__dict__['_orig'] (x)
+    re = builtins.__dict__['_orig'] (x)
 
     # Transform the output to UTF-8
-    if type(re) == types.UnicodeType:
+    if type(re) == str:
         re = re.encode ('UTF-8')
 
     return re
@@ -69,8 +69,8 @@ def unicode_utf8_workaround():
     # rather than UTF-8, and to convert the translated strings back
     # to UTF-8 to be consumed by CTK. [workaround]
     #
-    __builtin__.__dict__['_orig'] = __builtin__.__dict__['_']
-    __builtin__.__dict__['_']     = underscore_wrapper
+    builtins.__dict__['_orig'] = builtins.__dict__['_']
+    builtins.__dict__['_']     = underscore_wrapper
 
 
 def install (*args, **kwargs):
@@ -99,7 +99,7 @@ def install_translation (propg, localedir, languages, *args, **kwargs):
     re = gettext.translation (propg, localedir, languages, *args, **kwargs)
 
     # Install the new gettext object
-    re.install (unicode=True)
+    re.install (str=True)
 
     # It worked, store the global
     if languages:

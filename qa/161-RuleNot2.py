@@ -43,4 +43,4 @@ class Test (TestBase):
 
         self.conf = CONF % (VSERVER, d)
 
-        f = self.WriteFile (d2, 'test', 0755, CGI)
+        f = self.WriteFile (d2, 'test', 0o755, CGI)

@@ -274,7 +274,7 @@ class AsciiDocAPI(object):
             opts('--out-file', outfile)
         if backend is not None:
             opts('--backend', backend)
-        for k, v in self.attributes.items():
+        for k, v in list(self.attributes.items()):
             if v == '' or k[-1] in '!@':
                 s = k
             elif v is None:  # A None value undefines the attribute.

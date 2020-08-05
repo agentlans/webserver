@@ -31,7 +31,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         tmpfile = self.WriteTemp (MAGIC)
-        self.WriteFile (www, FILE, 0444, SCRIPT)
+        self.WriteFile (www, FILE, 0o444, SCRIPT)
 
         self.post             = chunk_encode("var=" + MAGIC)
         self.expected_content = "file:%s" % (tmpfile)

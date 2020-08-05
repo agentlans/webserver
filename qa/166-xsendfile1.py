@@ -39,4 +39,4 @@ class Test (TestBase):
         cgi  = CGI % (temp, DISCART)
 
         d = self.Mkdir (www, DIR)
-        f = self.WriteFile (d, FILE, 0755, cgi)
+        f = self.WriteFile (d, FILE, 0o755, cgi)

@@ -22,10 +22,10 @@
 # 02110-1301, USA.
 #
 
-from Box import Box
-from List import List
-from Link import Link
-from RawHTML import RawHTML
+from .Box import Box
+from .List import List
+from .Link import Link
+from .RawHTML import RawHTML
 
 HEADERS = [
     '<script type="text/javascript" src="/CTK/js/Carousel.js"></script>'

@@ -289,7 +289,7 @@ class ComboFlags (CTK.ComboCfg):
         props = _props.copy()
 
         # Contries
-        codes = ISO_3166.keys()
+        codes = list(ISO_3166.keys())
         codes.sort()
 
         countries = []
@@ -316,12 +316,12 @@ class CheckListFlags (CTK.Box):
 
         # Flags
         props = _props.copy()
-        codes = ISO_3166.keys()
+        codes = list(ISO_3166.keys())
         codes.sort()
         props['class'] = 'flag_checkbox'
 
         # Initial values
-        selected = filter (lambda x: x, [x.strip() for x in CTK.cfg.get_val (key,'').split(',')])
+        selected = [x for x in [x.strip() for x in CTK.cfg.get_val (key,'').split(',')] if x]
 
         self += CTK.RawHTML ('<strong>%s</strong>' %(_("Countries")))
         for k in codes:

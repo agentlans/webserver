@@ -61,4 +61,4 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "cgi_error_403_1")
-        f = self.WriteFile (d, "exec.cgi", 0555, CGI_BASE % (ERROR, ERROR_MSG))
+        f = self.WriteFile (d, "exec.cgi", 0o555, CGI_BASE % (ERROR, ERROR_MSG))

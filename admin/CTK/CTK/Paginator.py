@@ -25,13 +25,13 @@
 import re
 import string
 
-from Box import Box
-from Widget import Widget, RenderResponse
-from RawHTML import RawHTML
-from Refreshable import Refreshable
-from Container import Container
-from Link import Link
-from Server import request
+from .Box import Box
+from .Widget import Widget, RenderResponse
+from .RawHTML import RawHTML
+from .Refreshable import Refreshable
+from .Container import Container
+from .Link import Link
+from .Server import request
 
 FOOTER_OPTIONS   = 3
 SHOW_FOOTER_1PAG = False
@@ -54,8 +54,8 @@ class Paginator_Footer (Box):
         if page_num - FOOTER_OPTIONS < 0:
             extra += abs (page_num - (FOOTER_OPTIONS + 1))
 
-        chunk_raw = range(page_num - (FOOTER_OPTIONS + extra), page_num + FOOTER_OPTIONS + extra + 1)
-        chunk     = filter (lambda x: x >= 0 and x < total_pages, chunk_raw)
+        chunk_raw = list(range(page_num - (FOOTER_OPTIONS + extra), page_num + FOOTER_OPTIONS + extra + 1))
+        chunk     = [x for x in chunk_raw if x >= 0 and x < total_pages]
 
         # Render it
         if page_num != 0:
@@ -100,7 +100,7 @@ class Paginator_Refresh (Widget):
         if tmp:
             self.page_num = int(tmp[0])
             paginator_last_refresh [refreshable.id] = self.page_num
-        elif paginator_last_refresh.has_key (refreshable.id):
+        elif refreshable.id in paginator_last_refresh:
             self.page_num = paginator_last_refresh [refreshable.id]
         else:
             self.page_num = page_num

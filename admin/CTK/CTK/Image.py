@@ -22,7 +22,7 @@
 # 02110-1301, USA.
 #
 
-from Widget import Widget
+from .Widget import Widget
 
 class Image (Widget):
     """

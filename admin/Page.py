@@ -159,8 +159,8 @@ class Base (CTK.Page):
         template['advanced']  = _('Advanced')
         template['help']      = _('Help')
         template['updating']  = _('Updating...')
-        template['HELP_HTML'] = kwargs.has_key('helps') and HELP_HTML or ''
-        template['HELP_JS']   = kwargs.has_key('helps') and HELP_JS   or ''
+        template['HELP_HTML'] = 'helps' in kwargs and HELP_HTML or ''
+        template['HELP_JS']   = 'helps' in kwargs and HELP_JS   or ''
 
         # <body> property
         if body_id:
@@ -175,7 +175,7 @@ class Base (CTK.Page):
         heads.append ('<link rel="stylesheet" type="text/css" href="/static/css/cherokee-admin.css" />')
 
         # Help translation
-        if kwargs.has_key('helps'):
+        if 'helps' in kwargs:
             helps = [(x[0], _(x[1])) for x in kwargs['helps']]
             kwargs['helps'] = helps
 

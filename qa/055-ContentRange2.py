@@ -17,7 +17,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         tmp = letters_random (LENGTH)
-        self.WriteFile (www, "Range100k", 0444, tmp)
+        self.WriteFile (www, "Range100k", 0o444, tmp)
 
         tmpfile = self.WriteTemp (tmp[OFFSET:])
 

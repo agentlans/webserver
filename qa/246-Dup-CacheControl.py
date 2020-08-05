@@ -32,7 +32,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, "%s.%s"%(FILE,EXT), 0666, MAGIC)
+        self.WriteFile (d, "%s.%s"%(FILE,EXT), 0o666, MAGIC)
 
     def CustomTest (self):
         body_low = self.reply.lower()

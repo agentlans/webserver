@@ -20,7 +20,7 @@ class Test (TestBase):
         random_str  = letters_random (POST_LENGTH)
         tmpfile = self.WriteTemp (random_str)
 
-        self.WriteFile (www, "Post100k.php", 0444,
+        self.WriteFile (www, "Post100k.php", 0o444,
                         "<?php echo $_POST['var']; ?>")
 
         self.post             = "var="+random_str

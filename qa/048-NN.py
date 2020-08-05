@@ -28,7 +28,7 @@ class Test (TestBase):
         d = self.Mkdir (www, "nn1_root")
 
         self.WriteFile (d, "name")
-        self.WriteFile (d, MAGIC, 0444, CONTENT)
+        self.WriteFile (d, MAGIC, 0o444, CONTENT)
         self.WriteFile (d, "ABCD")
         self.WriteFile (d, "alobbs")
 

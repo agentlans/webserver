@@ -30,9 +30,9 @@ $('#%s').bind ('upload_finished', function (event) {
 def handler_complete (filename, target_dir, target_file, params):
     """ Server-Side 'complete' event handler """
 
-    print "I'm python, and this is the uploaded file:"
-    print os.popen("ls -l '%s'" %(os.path.join(target_dir, target_file))).read()
-    print "And these the parameters", params
+    print("I'm python, and this is the uploaded file:")
+    print(os.popen("ls -l '%s'" %(os.path.join(target_dir, target_file))).read())
+    print("And these the parameters", params)
 
     return 'ok'
 

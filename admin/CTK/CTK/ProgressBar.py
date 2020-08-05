@@ -21,8 +21,8 @@
 #
 
 import os
-from Widget import Widget
-from util import props_to_str
+from .Widget import Widget
+from .util import props_to_str
 
 HEADERS = [
     '<link type="text/css" href="/CTK/css/CTK.css" rel="stylesheet" />',

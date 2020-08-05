@@ -83,7 +83,7 @@ def update_rules_methods(cfg, key, node):
         if method_value in METHODS_MAP:
             cfg[method_key] = METHODS_MAP[method_value]
     else:
-        for k in node.keys():
+        for k in list(node.keys()):
             child_key = '%s!%s' % (key, k)
             child_node = cfg[child_key]
             update_rules_methods(cfg, child_key, child_node)
@@ -140,8 +140,8 @@ def config_version_cfg_is_up_to_date (cfg):
 
     # Compare both of them
     if int(ver_config) > int(ver_cherokee):
-        print "WARNING!! Running a new configuration file (version %d)"  % int(ver_config)
-        print "          with an older version of Cherokee (version %d)" % int(ver_cherokee)
+        print("WARNING!! Running a new configuration file (version %d)"  % int(ver_config))
+        print("          with an older version of Cherokee (version %d)" % int(ver_cherokee))
         return True
 
     elif int(ver_config) == int(ver_cherokee):

@@ -49,5 +49,5 @@ class Test (TestBase):
         self.Remove (self.public_html, '208')
         droot = self.Mkdir (self.public_html, DIR)
 
-        self.WriteFile (droot, FILE, 0555, CGI_BASE)
+        self.WriteFile (droot, FILE, 0o555, CGI_BASE)
         self.conf = CONF % (DOMAIN, droot, PUBLIC_HTML, DIR)

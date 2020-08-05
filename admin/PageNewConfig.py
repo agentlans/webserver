@@ -83,7 +83,7 @@ class ConfigCreator:
             try:
                 os.mkdir (dirname)
             except:
-                print "ERROR: Could not create directory '%s'" %(dirname)
+                print("ERROR: Could not create directory '%s'" %(dirname))
                 return False
 
         # Configuration content
@@ -106,7 +106,7 @@ class ConfigCreator:
             f.write (content)
             f.close()
         except:
-            print "ERROR: Could not open '%s' for writing" %(filename)
+            print("ERROR: Could not open '%s' for writing" %(filename))
             return False
 
         CTK.cfg.load()

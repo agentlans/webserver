@@ -63,7 +63,7 @@ def modify():
                 val = validator (new, CTK.cfg.get_val(k))
                 if util.lists_differ (val, new):
                     updates[k] = val
-            except ValueError, e:
+            except ValueError as e:
                 return {'ret': "error", 'errors': {k: str(e)}}
 
     if updates:
@@ -329,7 +329,7 @@ class AddIcon (CTK.Container):
                  'default':          _('Default'),
                  'directory':        _('Directory'),
                  'parent_directory': _('Go to Parent')}
-        assert key in descs.keys()
+        assert key in list(descs.keys())
         label = descs[key]
 
         table = CTK.Table()

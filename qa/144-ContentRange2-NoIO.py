@@ -28,7 +28,7 @@ class Test (TestBase):
         self.conf = CONF.replace('<dir>', test_dir)
 
         random  = letters_random (LENGTH)
-        self.WriteFile (test_dir, "Range100k", 0444, random)
+        self.WriteFile (test_dir, "Range100k", 0o444, random)
 
         tmpfile = self.WriteTemp (random[OFFSET:])
 

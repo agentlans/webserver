@@ -20,7 +20,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         self.Mkdir (www, "pathinfo3")
-        self.WriteFile (www, "pathinfo3/test", 0555,
+        self.WriteFile (www, "pathinfo3/test", 0o555,
                         """#!/bin/sh
 
                         echo "Content-type: text/html"

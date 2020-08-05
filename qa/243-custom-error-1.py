@@ -28,6 +28,6 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DOMAIN)
-        self.WriteFile (d, "404.txt", 0644, CONTENT_404)
+        self.WriteFile (d, "404.txt", 0o644, CONTENT_404)
 
         self.conf = CONF % (DOMAIN, d)

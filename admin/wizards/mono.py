@@ -260,7 +260,7 @@ def is_mono_dir (path):
     if 'index.aspx' in files or 'default.aspx' in files:
         return path
 
-    raise ValueError, _(ERROR_NO_MONO)
+    raise ValueError(_(ERROR_NO_MONO))
 
 VALS = [
     ('%s!mono_dir'     %(PREFIX), validations.is_not_empty),

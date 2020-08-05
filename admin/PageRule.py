@@ -185,12 +185,12 @@ class Render:
 
                 handler = CTK.cfg.get_val ('vserver!%s!rule!%s!handler' %(vsrv_num, r))
                 if handler:
-                    desc = filter (lambda x: x[0] == handler, HANDLERS)[0][1]
+                    desc = [x for x in HANDLERS if x[0] == handler][0][1]
                     comment.append (_(desc))
 
                 auth = CTK.cfg.get_val ('vserver!%s!rule!%s!auth' %(vsrv_num, r))
                 if auth:
-                    desc = filter (lambda x: x[0] == auth, VALIDATORS)[0][1]
+                    desc = [x for x in VALIDATORS if x[0] == auth][0][1]
                     comment.append (_(desc))
 
                 for e in CTK.cfg.keys ('vserver!%s!rule!%s!encoder'%(vsrv_num, r)):

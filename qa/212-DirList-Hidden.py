@@ -26,4 +26,4 @@ class Test (TestBase):
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
         for t in HIDDEN + FILES:
-            self.WriteFile (d, t, 0444)
+            self.WriteFile (d, t, 0o444)

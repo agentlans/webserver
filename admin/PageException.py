@@ -27,9 +27,8 @@ import CTK
 import Cherokee
 import configured
 from CTK.util import formatter
-
-from urllib import quote, unquote, urlencode
-from httplib import HTTPConnection
+from urllib.parse import quote, unquote, urlencode
+from http.client import HTTPConnection
 
 URL_BTS         = 'http://bugs.cherokee-project.com/new'
 URL_REPORT_HOST = 'www.cherokee-project.com'

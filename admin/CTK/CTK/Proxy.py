@@ -20,11 +20,11 @@
 # 02110-1301, USA.
 #
 
-from consts import *
-from Box import Box
-from Server import publish, get_scgi
+from .consts import *
+from .Box import Box
+from .Server import publish, get_scgi
 
-from httplib import HTTPConnection
+from http.client import HTTPConnection
 
 
 JAVASCRIPT = """

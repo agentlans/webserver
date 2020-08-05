@@ -24,7 +24,7 @@ def count_down (msg, nsecs, nl=True):
         sys.stdout.flush()
         time.sleep(1)
     if nl:
-        print
+        print()
 
 def str_random_generate (n):
     c = ""
@@ -32,7 +32,7 @@ def str_random_generate (n):
     y = int (random.random() * 100)
     z = int (random.random() * 100)
 
-    for i in xrange(n):
+    for i in range(n):
         x = (171 * x) % 30269
         y = (172 * y) % 30307
         z = (170 * z) % 30323
@@ -46,7 +46,7 @@ def letters_random_generate (n):
     y = int (random.random() * 100)
     z = int (random.random() * 100)
 
-    for i in xrange(n):
+    for i in range(n):
         x = (171 * x) % 30269
         y = (172 * y) % 30307
         z = (170 * z) % 30323
@@ -165,7 +165,7 @@ def look_for_exec_in_path (name):
 
 
 def print_key (key, val):
-    print "%10s: %s" % (key, val)
+    print("%10s: %s" % (key, val))
 
 
 __free_port = 5000
@@ -236,7 +236,7 @@ def cherokee_build_info_has (filter, module):
 def cherokee_has_plugin (module):
     # Check for the dynamic plug-in
     try:
-        mods = filter(lambda x: module in x, os.listdir(CHEROKEE_PLUGINDIR))
+        mods = [x for x in os.listdir(CHEROKEE_PLUGINDIR) if module in x]
         if len(mods) >= 1:
             return True
     except:
@@ -246,7 +246,7 @@ def cherokee_has_plugin (module):
 
 def print_sec (content):
     fcntl.flock (sys.stdout, fcntl.LOCK_EX)
-    print content
+    print(content)
     fcntl.flock (sys.stdout, fcntl.LOCK_UN)
 
 def ip_is_private(ip):
@@ -307,5 +307,5 @@ import copy
 import types
 
 def _deepcopy_method(x, memo):
-    return type(x)(x.im_func, copy.deepcopy(x.im_self, memo), x.im_class)
+    return type(x)(x.__func__, copy.deepcopy(x.__self__, memo), x.__self__.__class__)
 copy._deepcopy_dispatch[types.MethodType] = _deepcopy_method

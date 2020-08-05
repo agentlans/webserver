@@ -33,7 +33,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, DIR)
-        self.WriteFile (d, "test.php", 0755, PHP_BASE)
+        self.WriteFile (d, "test.php", 0o755, PHP_BASE)
 
     def Precondition (self):
         return os.path.exists (look_for_php())

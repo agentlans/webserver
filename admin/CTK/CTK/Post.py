@@ -21,7 +21,7 @@
 #
 
 from cgi import parse_qs
-from urllib import unquote
+from urllib.parse import unquote
 
 
 class Post:
@@ -43,7 +43,7 @@ class Post:
         if not key in self._vars:
             return None
 
-        vals = filter(lambda x: len(x)>0, self._vars[key])
+        vals = [x for x in self._vars[key] if len(x)>0]
         if not len(vals) > 0:
             return self._vars[key][0]
 
@@ -61,7 +61,7 @@ class Post:
         if not key in self._vars:
             return not_found[:]
 
-        return filter(lambda x: len(x)>0, self._vars[key])
+        return [x for x in self._vars[key] if len(x)>0]
 
     def pop (self, key, not_found=None):
         """Remove specified key and return the corresponding value. If
@@ -75,7 +75,7 @@ class Post:
 
     def keys (self):
         """List of available keys"""
-        return self._vars.keys()
+        return list(self._vars.keys())
 
     # Relay on the internal array methods
     #
@@ -92,7 +92,7 @@ class Post:
         return len(self._vars)
 
     def __iter__ (self):
-        keys = self._vars.keys()
+        keys = list(self._vars.keys())
         keys.sort (lambda x,y: cmp(len(y), len(x)))
         return iter(keys)
 

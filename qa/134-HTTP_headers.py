@@ -49,7 +49,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "http_headers1")
-        self.WriteFile (d, "test.php", 0444, """<?php
+        self.WriteFile (d, "test.php", 0o444, """<?php
            echo 'User-Agent - '        . $_SERVER['HTTP_USER_AGENT']        .'\n';
            echo 'Accept - '            . $_SERVER['HTTP_ACCEPT']            .'\n';
            echo 'Accept-Language - '   . $_SERVER['HTTP_ACCEPT_LANGUAGE']   .'\n';

@@ -35,6 +35,7 @@ import validations
 import Cherokee
 from util import *
 from configured import *
+from functools import reduce
 
 NOTE_WELCOME_H1 = N_("Welcome to the Redirection Wizard")
 NOTE_WELCOME_P1 = N_("This Wizard creates a new virtual server redirecting every request to another domain host.")

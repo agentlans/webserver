@@ -50,7 +50,7 @@ class Test (TestBase):
                                   CHUNKED_BEGIN, MAGIC, CHUNKED_FINISH]
 
     def Prepare (self, www):
-        scgi_file = self.WriteFile (www, "scgi_chunked1.scgi", 0444, SCRIPT)
+        scgi_file = self.WriteFile (www, "scgi_chunked1.scgi", 0o444, SCRIPT)
 
         pyscgi = os.path.join (www, 'pyscgi.py')
         if not os.path.exists (pyscgi):

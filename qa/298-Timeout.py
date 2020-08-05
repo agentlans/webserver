@@ -75,7 +75,7 @@ class Test (TestCollection):
                 # Write the new script files
                 filename = 'test-%i-seconds.cgi' % script_runtime
                 code = CGI_CODE % dict(runtime=script_runtime, content=CONTENT)
-                self.WriteFile (self.local_dirs[dir], filename, 0755, code)
+                self.WriteFile (self.local_dirs[dir], filename, 0o755, code)
                 self.filenames[dir].append(filename)
 
                 obj = self.Add (TestEntry (dir,

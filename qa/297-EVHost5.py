@@ -29,5 +29,5 @@ class Test (TestBase):
         ev = self.Mkdir (www, "test_297_evhost")
         d2 = self.Mkdir (ev,  "%s/users/297-qa/public"%(ev))
 
-        self.WriteFile (d2, "file", 0444, MAGIC)
+        self.WriteFile (d2, "file", 0o444, MAGIC)
         self.conf = CONF % (d1, ev)

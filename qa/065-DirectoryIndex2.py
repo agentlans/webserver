@@ -15,7 +15,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "directoryindex2")
-        self.WriteFile (d, "test_index.php", 0444,
+        self.WriteFile (d, "test_index.php", 0o444,
                         '<?php echo "%s"."%s"; ?>'%(MAGIC1, MAGIC2))
 
     def Precondition (self):

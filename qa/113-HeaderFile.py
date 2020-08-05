@@ -25,8 +25,8 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "header_file1")
-        f = self.WriteFile (d, "file", 0444, random_str)
-        f = self.WriteFile (d, "header", 0444, HEADER_CONTENT)
+        f = self.WriteFile (d, "file", 0o444, random_str)
+        f = self.WriteFile (d, "header", 0o444, HEADER_CONTENT)
 
         tmpfile = self.WriteTemp (random_str)
 

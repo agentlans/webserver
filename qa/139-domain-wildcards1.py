@@ -38,8 +38,8 @@ class Test (TestBase):
         d1 = self.Mkdir (www, "%s_dir1" % (DOMAIN))
         d2 = self.Mkdir (www, "%s_dir2" % (DOMAIN))
 
-        self.WriteFile (d1, FILENAME, 0444, MAGIC1);
-        self.WriteFile (d2, FILENAME, 0444, MAGIC2);
+        self.WriteFile (d1, FILENAME, 0o444, MAGIC1);
+        self.WriteFile (d2, FILENAME, 0o444, MAGIC2);
 
 
         self.conf = CONF % (d1, d2)

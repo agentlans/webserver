@@ -55,7 +55,7 @@ class Test (TestBase):
     def Prepare (self, www):
         droot = self.Mkdir (www, DOMAIN)
         local_dir = self.Mkdir (droot, DIR_LOCAL)
-        self.WriteFile (local_dir, CGI_FILE, 0755, CGI_BASE)
+        self.WriteFile (local_dir, CGI_FILE, 0o755, CGI_BASE)
 
         vars = globals()
         vars['droot']     = droot

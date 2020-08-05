@@ -52,7 +52,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "if_range1")
-        f = self.WriteFile (d, "file", 0444, DOCUMENTATION)
+        f = self.WriteFile (d, "file", 0o444, DOCUMENTATION)
 
         st = os.stat (f)
         mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime = st

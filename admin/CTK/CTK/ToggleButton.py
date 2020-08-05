@@ -20,9 +20,9 @@
 # 02110-1301, USA.
 #
 
-from Widget import Widget
-from util import props_to_str
-from Image import ImageStock
+from .Widget import Widget
+from .util import props_to_str
+from .Image import ImageStock
 
 HTML = """
 <div id="%(id)s" %(props)s>

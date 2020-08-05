@@ -39,5 +39,5 @@ class Test (TestBase):
         self.conf              = CONF
 
     def Prepare (self, www):
-        d = self.Mkdir (www, DIR, 0777)
-        self.WriteFile (d, "test", 0555, CGI_CODE)
+        d = self.Mkdir (www, DIR, 0o777)
+        self.WriteFile (d, "test", 0o555, CGI_CODE)

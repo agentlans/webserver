@@ -16,7 +16,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "php3")
-        self.WriteFile (d, "post.php", 0444, '<?php echo $_POST["magic"] ?>')
+        self.WriteFile (d, "post.php", 0o444, '<?php echo $_POST["magic"] ?>')
 
     def Precondition (self):
         return os.path.exists (look_for_php())

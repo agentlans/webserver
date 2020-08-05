@@ -24,10 +24,10 @@ import os
 import tempfile
 from cgi import FieldStorage
 
-from Box import Box
-from Button import Button
-from RawHTML import RawHTML
-from Server import publish, get_scgi
+from .Box import Box
+from .Button import Button
+from .RawHTML import RawHTML
+from .Server import publish, get_scgi
 
 HEADERS = [
     '<script type="text/javascript" src="/CTK/js/ajaxupload.3.6.js"></script>'
@@ -65,7 +65,7 @@ new AjaxUpload (button, {
 # The internal POST Receiver and Storage classes are imported from
 # CTK.Uploader().
 #
-from Uploader import UploadRequest
+from .Uploader import UploadRequest
 
 
 class AjaxUpload_Generic (Box):

@@ -177,7 +177,7 @@ def cfg_source_find_empty_port (n_ports=1):
 
     pport = 1025
     while pport+n_ports < 65535:
-        pports = range(pport, pport + n_ports)
+        pports = list(range(pport, pport + n_ports))
         for x in pports:
             if x in ports:
                 pport += 1
@@ -285,7 +285,7 @@ def path_find_binary (executable, extra_dirs=[], custom_test=None, default=None)
     # $PATH
     env_path = os.getenv("PATH")
     if env_path:
-        dirs += filter (lambda x: x, env_path.split(":"))
+        dirs += [x for x in env_path.split(":") if x]
 
     # Check
     if type(executable) != list:

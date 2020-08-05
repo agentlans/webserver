@@ -26,13 +26,13 @@ import imp
 import string
 import traceback
 
-from consts import *
-from Widget import Widget
-from Container import Container
-from Combobox import ComboCfg
-from Server import cfg, publish, post, get_server
-from PageCleaner import Postprocess
-from Help import HelpEntry, HelpGroup
+from .consts import *
+from .Widget import Widget
+from .Container import Container
+from .Combobox import ComboCfg
+from .Server import cfg, publish, post, get_server
+from .PageCleaner import Postprocess
+from .Help import HelpEntry, HelpGroup
 
 
 SELECTOR_CHANGED_JS = """
@@ -80,7 +80,7 @@ class Plugin (Container):
 class PluginInstanceProxy:
     def __call__ (self, key, modules, **kwargs):
         # Update the configuration
-        if not key in post.keys():
+        if not key in list(post.keys()):
             return ''
 
         new_val = post.get_val (key)
@@ -181,7 +181,7 @@ def load_module_pyc (fullpath_pyc, namespace, use_cache=True, load_src=True):
     for fullpath in files:
         # Cache
         if use_cache:
-            if sys.modules.has_key (namespace):
+            if namespace in sys.modules:
                 if sys.modules[namespace].__file__ == fullpath:
                     return sys.modules[namespace]
 
@@ -213,7 +213,7 @@ def load_module (name, dirname):
             break
 
     # Shortcut: it might be loaded
-    if sys.modules.has_key (name):
+    if name in sys.modules:
         loaded_mod_file = sys.modules[name].__file__
         if loaded_mod_file.endswith('.pyc'):
             loaded_mod_file = loaded_mod_file[:-1]
@@ -227,7 +227,7 @@ def load_module (name, dirname):
     try:
         return imp.load_source (name, fullpath)
     except IOError:
-        print "Could not load '%s'." %(fullpath)
+        print("Could not load '%s'." %(fullpath))
         raise
 
 

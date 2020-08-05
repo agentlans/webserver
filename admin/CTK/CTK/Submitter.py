@@ -20,14 +20,14 @@
 # 02110-1301, USA.
 #
 
-from consts import *
-from Button import Button
-from RawHTML import RawHTML
-from Container import Container
-from TextArea import TextArea
-from TextField import TextField
-from PageCleaner import Uniq_Block
-from Server import get_server
+from .consts import *
+from .Button import Button
+from .RawHTML import RawHTML
+from .Container import Container
+from .TextArea import TextArea
+from .TextField import TextField
+from .PageCleaner import Uniq_Block
+from .Server import get_server
 
 HEADER = ['<script type="text/javascript" src="/CTK/js/Submitter.js"></script>']
 

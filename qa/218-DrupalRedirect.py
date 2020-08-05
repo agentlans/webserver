@@ -40,4 +40,4 @@ class Test (TestBase):
         srvr = self.Mkdir (www, "domain_%s" % (DOMAIN))
         self.conf = CONF % (DOMAIN, srvr)
 
-        self.WriteFile (srvr, "index.cgi", 0755, CGI_BASE)
+        self.WriteFile (srvr, "index.cgi", 0o755, CGI_BASE)

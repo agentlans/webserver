@@ -24,8 +24,8 @@ import os
 import stat
 import inspect
 
-from Widget import Widget
-from util import formatter
+from .Widget import Widget
+from .util import formatter
 
 class Template (Widget):
     cache = {}
@@ -36,9 +36,9 @@ class Template (Widget):
         self.content  = None
         self.vars     = {}
 
-        if kwargs.has_key('filename'):
+        if 'filename' in kwargs:
             self.filename = kwargs['filename']
-        elif kwargs.has_key('content'):
+        elif 'content' in kwargs:
             self.content  = kwargs['content']
 
     def _content_update (self):

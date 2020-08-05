@@ -12,6 +12,6 @@ class Test (TestBase):
         self.request        = "GET /%s HTTP/1.0\r\n" % (FILE.replace(' ', '%20'))
 
     def Prepare (self, www):
-        self.WriteFile (www, FILE, 0444, MAGIC)
+        self.WriteFile (www, FILE, 0o444, MAGIC)
 
 

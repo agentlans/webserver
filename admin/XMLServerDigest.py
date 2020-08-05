@@ -27,8 +27,8 @@ import errno
 import base64
 import socket
 import random
-import httplib
-import xmlrpclib
+import http.client
+import xmlrpc.client
 import configured
 
 try:
@@ -39,20 +39,20 @@ except ImportError:
     from md5 import md5
 
 from urllib2 import urlparse
-from urllib import splituser, splitpasswd
+from urllib.parse import splituser, splitpasswd
 
 
-class CustomTransport(xmlrpclib.Transport):
+class CustomTransport(xmlrpc.client.Transport):
     proxy_keys = dict (HTTP_PROXY  = 'http',
                        HTTPS_PROXY = 'https')
 
     def __init__(self, proxies={}, local=False):
         # Warning: Check for parent's init. The xmlrpclib.Transport
         # class does not implement __init__() on Python 2.4
-        if hasattr (xmlrpclib.Transport, '__init__'):
-            xmlrpclib.Transport.__init__(self)
+        if hasattr (xmlrpc.client.Transport, '__init__'):
+            xmlrpc.client.Transport.__init__(self)
 
-        self.proxies = dict(((self.proxy_keys[k],v) for k,v in os.environ.items() if k in self.proxy_keys))
+        self.proxies = dict(((self.proxy_keys[k],v) for k,v in list(os.environ.items()) if k in self.proxy_keys))
         self.proxies.update(proxies)
 
         self.local      = local
@@ -64,9 +64,9 @@ class CustomTransport(xmlrpclib.Transport):
         self.user_pass, self.realhost = splituser(host)
         proto, proxy, p1,p2,p3,p4 = urlparse.urlparse (self.proxies.get('http', ''))
         if proxy and not self.local:
-            return httplib.HTTP(proxy)
+            return http.client.HTTP(proxy)
         else:
-            return httplib.HTTP(self.realhost)
+            return http.client.HTTP(self.realhost)
 
     def send_request(self, connection, handler, request_body):
         connection.putrequest ("POST", handler)
@@ -85,7 +85,7 @@ class CustomTransport(xmlrpclib.Transport):
             if not response:
                 break
             if self.verbose:
-                print "body:", repr(response)
+                print("body:", repr(response))
             p.feed(response)
 
         file.close()
@@ -118,14 +118,15 @@ class CustomTransport(xmlrpclib.Transport):
         try:
             if request_body:
                 h._conn.sock.sendall (request_body)
-        except socket.error, (code, msg):
+        except socket.error as xxx_todo_changeme:
+            (code, msg) = xxx_todo_changeme.args
             if not code in (errno.ECONNRESET, errno.ECONNABORTED, errno.EPIPE):
                 raise
 
         # The rest is as in the original Transport::request() method
         errcode, errmsg, headers = h.getreply()
         if errcode != 200:
-            raise xmlrpclib.ProtocolError(
+            raise xmlrpc.client.ProtocolError(
                 host + handler,
                 errcode, errmsg,
                 headers
@@ -143,7 +144,7 @@ class CustomTransport(xmlrpclib.Transport):
         for count in range(3):
             try:
                 return self._request_internal (host, handler, request_body, verbose)
-            except xmlrpclib.ProtocolError, ex:
+            except xmlrpc.client.ProtocolError as ex:
                 if ex.errcode == 401:
                     auth, params = ex.headers['WWW-Authenticate'].split(' ', 1)
                     self.uri    = handler
@@ -190,7 +191,7 @@ class CustomTransport(xmlrpclib.Transport):
                 connection.putheader('Authorization', 'Digest %s' % ', '.join(params))
 
 
-class XmlRpcServer (xmlrpclib.ServerProxy):
+class XmlRpcServer (xmlrpc.client.ServerProxy):
     def __init__(self, url, user='', password='', local=False):
         protocol,domain,path, d1,params,d3 = urlparse.urlparse(url)
         if params:
@@ -201,7 +202,7 @@ class XmlRpcServer (xmlrpclib.ServerProxy):
             user_pass = ':'.join([user,password]) + '@'
 
         href = '%(protocol)s://%(user_pass)s%(domain)s%(path)s%(params)s' % locals()
-        xmlrpclib.ServerProxy.__init__ (self, href, transport=CustomTransport(local=local), allow_none=True)
+        xmlrpc.client.ServerProxy.__init__ (self, href, transport=CustomTransport(local=local), allow_none=True)
 
 
 #if __name__=='__main__':

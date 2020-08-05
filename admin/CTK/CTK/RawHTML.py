@@ -20,8 +20,8 @@
 # 02110-1301, USA.
 #
 
-from Widget import Widget
-from util import to_utf8
+from .Widget import Widget
+from .util import to_utf8
 
 
 class RawHTML (Widget):

@@ -27,7 +27,7 @@ class Test (TestBase):
     def Prepare (self, www):
         droot = self.Mkdir (www, "%s_droot"%(NICK))
         e = self.Mkdir (droot, "errors")
-        self.WriteFile (e, "default.txt", 0444, ERROR_MSG)
+        self.WriteFile (e, "default.txt", 0o444, ERROR_MSG)
 
         vars = globals()
         vars.update(locals())

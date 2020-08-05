@@ -34,17 +34,17 @@ def main (test):
     cherokee_conf = write_cherokee_conf (test)
     command = "cherokee -C %s" %(cherokee_conf)
 
-    print "Running:   %s" % (test)
-    print "Executing: %s" % (command)
-    print
+    print("Running:   %s" % (test))
+    print("Executing: %s" % (command))
+    print()
 
     os.system(command)
 
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print "USAGE:"
-        print "  %s test.py" %(sys.argv[0])
+        print("USAGE:")
+        print("  %s test.py" %(sys.argv[0]))
         raise SystemExit
 
     main (sys.argv[1])

@@ -61,7 +61,8 @@ class TestBase:
                     return self.ssl.read (DEFAULT_READ)
                 else:
                     return s.recv (DEFAULT_READ)
-            except socket.error, (err, strerr):
+            except socket.error as xxx_todo_changeme:
+                (err, strerr) = xxx_todo_changeme.args
                 if err == errno.EAGAIN or \
                    err == errno.EWOULDBLOCK or \
                    err == errno.EINPROGRESS:
@@ -74,12 +75,12 @@ class TestBase:
 
             try:
                 s = socket.socket(af, socktype, proto)
-            except socket.error, msg:
+            except socket.error as msg:
                 continue
 
             try:
                 s.connect(sa)
-            except socket.error, msg:
+            except socket.error as msg:
                 s.close()
                 s = None
                 continue
@@ -91,7 +92,7 @@ class TestBase:
         if self.is_ssl:
             try:
                 self.ssl = socket.ssl (s)
-            except Exception, e:
+            except Exception as e:
                 raise Exception("Couldn't handshake SSL: "+str(e))
 
         request = self.request + "\r\n"
@@ -107,7 +108,7 @@ class TestBase:
         while True:
             try:
                 d = self._safe_read (s)
-            except Exception, e:
+            except Exception as e:
                 d = ''
 
             if not len(d):
@@ -165,11 +166,11 @@ class TestBase:
             return -1
 
         if self.expected_content != None:
-            if type(self.expected_content) in (types.StringType, types.UnicodeType):
+            if type(self.expected_content) in (bytes, str):
                 r = self._check_result_expected_item (self.expected_content)
                 if r == -1:
                     return -1
-            elif type(self.expected_content) == types.ListType:
+            elif type(self.expected_content) == list:
                 for entry in self.expected_content:
                     r = self._check_result_expected_item (entry)
                     if r == -1:
@@ -179,11 +180,11 @@ class TestBase:
 
 
         if self.forbidden_content != None:
-            if type(self.forbidden_content) in (types.StringType, types.UnicodeType):
+            if type(self.forbidden_content) in (bytes, str):
                 r = self._check_result_forbidden_item (self.forbidden_content)
                 if r == -1:
                     return -1
-            elif type(self.forbidden_content) == types.ListType:
+            elif type(self.forbidden_content) == list:
                 for entry in self.forbidden_content:
                     r = self._check_result_forbidden_item (entry)
                     if r == -1:
@@ -276,12 +277,12 @@ class TestBase:
 
         return src
 
-    def Mkdir (self, www, dir, mode=0777):
+    def Mkdir (self, www, dir, mode=0o777):
         fulldir = os.path.join (www, dir)
         os.makedirs(fulldir, mode)
         return fulldir
 
-    def WriteFile (self, www, filename, mode=0444, content=''):
+    def WriteFile (self, www, filename, mode=0o444, content=''):
         assert(type(mode) == int)
 
         fullpath = os.path.join (www, filename)

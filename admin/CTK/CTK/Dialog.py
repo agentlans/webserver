@@ -20,14 +20,14 @@
 # 02110-1301, USA.
 #
 
-import JS
-from Container import Container
-from Proxy import Proxy
-from Server import get_scgi
-from Image import ImageStock
-from Box import Box
-from PageCleaner import Uniq_Block
-from util import props_to_str, json_dump
+from . import JS
+from .Container import Container
+from .Proxy import Proxy
+from .Server import get_scgi
+from .Image import ImageStock
+from .Box import Box
+from .PageCleaner import Uniq_Block
+from .util import props_to_str, json_dump
 
 
 HEADERS = [

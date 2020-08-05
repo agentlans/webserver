@@ -26,7 +26,7 @@ class Test (TestBase):
 
     def Prepare (self, www):
         d = self.Mkdir (www, "prio2/sub")
-        f = self.WriteFile (d, "exec.prio2", 0555,
+        f = self.WriteFile (d, "exec.prio2", 0o555,
                             """#!/bin/sh
 
                             echo "Content-type: text/html"
