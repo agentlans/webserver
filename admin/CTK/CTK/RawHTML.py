@@ -52,8 +52,8 @@ class RawHTML (Widget):
         # contain strings such as 'style: 100%;', which aren't meant
         # to be variable replacement.
         #
-        html = html.replace ('%', '%%')
-        js   =   js.replace ('%', '%%')
+        html = html.replace (b'%', b'%%')
+        js   =   js.replace (b'%', b'%%')
 
         self.html = html
         self.js   = js
@@ -64,6 +64,6 @@ class RawHTML (Widget):
 
     def Render (self):
         render = Widget.Render(self)
-        render.html += self.html
-        render.js   += self.js
+        render.html += self.html.decode('utf-8')
+        render.js   += self.js.decode('utf-8')
         return render

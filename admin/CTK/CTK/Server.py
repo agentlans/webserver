@@ -179,7 +179,7 @@ class ServerHandler (pyscgi.SCGIHandler):
         def manage_exception():
             # Print the backtrace
             info = traceback.format_exc()
-            print(info, file=sys.stderr)
+            #print(info, file=sys.stderr)
 
             # Custom error management
             if error.page:
@@ -252,7 +252,7 @@ class Server:
 
         self.lock.acquire()
         try:
-            self._web_paths.sort(__cmp)
+            self._web_paths.sort()
         finally:
             self.lock.release()
 

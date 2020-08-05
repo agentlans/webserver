@@ -56,7 +56,7 @@ class SCGIHandler (socketserver.StreamRequestHandler):
         socketserver.StreamRequestHandler.__init__ (self, request, client_address, server)
 
     def __safe_read (self, length):
-        info = ''
+        info = ""
         while True:
             if len(info) >= length:
                 return info
@@ -64,7 +64,7 @@ class SCGIHandler (socketserver.StreamRequestHandler):
             chunk = None
             try:
                 to_read = length - len(info)
-                chunk = os.read (self.rfile.fileno(), to_read)
+                chunk = os.read (self.rfile.fileno(), to_read).decode('utf-8')
                 if not len(chunk):
                     return info
                 info += chunk
@@ -86,7 +86,7 @@ class SCGIHandler (socketserver.StreamRequestHandler):
                 return
 
             try:
-                sent = os.write (self.wfile.fileno(), buf[offset:])
+                sent = os.write (self.wfile.fileno(), buf[offset:].encode('utf-8'))
                 pending -= sent
                 offset  += sent
             except OSError as e:

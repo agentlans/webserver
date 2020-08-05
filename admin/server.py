@@ -36,6 +36,7 @@ import stat
 import socket
 import signal
 import _thread
+
 from functools import reduce
 
 # Import CTK
@@ -50,7 +51,7 @@ import PageError
 
 def init (scgi_port, cfg_file):
     # Translation support
-    CTK.i18n.install ('cherokee', LOCALEDIR, str=True)
+    CTK.i18n.install ('cherokee', LOCALEDIR) #, unicode=True)
 
     # Ensure SIGCHLD is set. It needs to receive the signal in order
     # to detect when its child processes finish.
@@ -66,9 +67,9 @@ def init (scgi_port, cfg_file):
     pid     = os.getpid()
 
     if scgi_port.isdigit():
-        print(_("Server %(version)s running.. PID=%(pid)d Port=%(scgi_port)s") % (locals()))
+        print (("Server %(version)s running.. PID=%(pid)d Port=%(scgi_port)s") % (locals()))
     else:
-        print(_("Server %(version)s running.. PID=%(pid)d Socket=%(scgi_port)s") % (locals()))
+        print (("Server %(version)s running.. PID=%(pid)d Socket=%(scgi_port)s") % (locals()))
 
     # Read configuration file
     CTK.cfg.file = cfg_file
@@ -83,7 +84,7 @@ def init (scgi_port, cfg_file):
         try:
             socket.getaddrinfo ("localhost", int(scgi_port))
         except socket.gaierror:
-            print("[FATAL ERROR]: The 'localhost' host name cannot be resolved.\n", file=sys.stderr)
+            print >> sys.stderr, "[FATAL ERROR]: The 'localhost' host name cannot be resolved.\n"
             sys.exit(1)
 
         CTK.init (host="localhost", port=int(scgi_port), sec_cookie=True, sec_submit=True)
@@ -124,7 +125,7 @@ def debug_set_up():
         import traceback, threading
 
         id2name = dict([(th.ident, th.name) for th in threading.enumerate()])
-        for threadId, stack in list(sys._current_frames().items()):
+        for threadId, stack in sys._current_frames().items():
             print('\n# Thread: %s(%d)' %(id2name[threadId], threadId))
             for filename, lineno, name, line in traceback.extract_stack(stack):
                 print('File: "%s", line %d, in %s' %(filename, lineno, name))
@@ -142,7 +143,7 @@ if __name__ == "__main__":
         scgi_port = sys.argv[1]
         cfg_file  = sys.argv[2]
     except:
-        print(_("Incorrect parameters: PORT CONFIG_FILE"))
+        print ("Incorrect parameters: PORT CONFIG_FILE")
         raise SystemExit
 
     # Debugging mode
